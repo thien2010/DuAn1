@@ -68,6 +68,8 @@ public class KhoanThuDAO {
         while (!cursor.isAfterLast()) {
             KhoanThu khoanThu = new KhoanThu();
             khoanThu.setIdthu(cursor.getInt(cursor.getColumnIndex(COLUMN_IDTHU)));
+            khoanThu.setNamethu(cursor.getString(cursor.getColumnIndex(COLUMN_NAME)));
+            khoanThu.setSotien(cursor.getFloat(cursor.getColumnIndex(COLUMN_SOTIEN)));
             try {
                 khoanThu.setNgaythu((Date) sdf.parse(cursor.getString(cursor.getColumnIndex(COLUMN_NGAYTHU))));
             } catch (ParseException e) {

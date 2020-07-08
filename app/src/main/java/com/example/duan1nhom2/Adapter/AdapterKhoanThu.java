@@ -52,8 +52,10 @@ public class AdapterKhoanThu extends BaseAdapter {
         ImageView img_thu = convertView.findViewById(R.id.img_thu);
         ImageView img_delete = convertView.findViewById(R.id.delete_Thu);
         ImageView img_update = convertView.findViewById(R.id.update_Thu);
+
         Format formatter = new SimpleDateFormat("yyyy-MM-dd");
         String s = formatter.format(khoanThu.getNgaythu());
+
         tv_ngaythu.setText("Ngày Thu: "+ s);
         tv_name.setText("Tên Khoản Thu: "+khoanThu.getNamethu());
         tv_sotien.setText("Số Tiền: "+khoanThu.getSotien());

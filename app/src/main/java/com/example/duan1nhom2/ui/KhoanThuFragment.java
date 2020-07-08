@@ -45,7 +45,6 @@ public class KhoanThuFragment extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_khoan_thu, container, false);
         lv_khoanthu = view.findViewById(R.id.lv_khoanThu);
         floatingActionButton = view.findViewById(R.id.btn_themThu);
-
         dataBase = new DataBase(getActivity());
         khoanThuDAO = new KhoanThuDAO(dataBase);
         khoanThus = khoanThuDAO.getAllKhoanThu();
@@ -109,7 +108,6 @@ public class KhoanThuFragment extends Fragment {
                         }
                         khoanThus.add(khoanThu);
                         adapterKhoanThu.setDatachange(khoanThus);
-                        lv_khoanthu.setAdapter(adapterKhoanThu);
                     }
                 });
                 builder.create().show();

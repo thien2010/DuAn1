@@ -69,6 +69,8 @@ public class KhoanChiDAO {
         while (!cursor.isAfterLast()){
             KhoanChi khoanChi = new KhoanChi();
             khoanChi.setIdchi(cursor.getInt(cursor.getColumnIndex(COLUMN_IDCHI)));
+            khoanChi.setNamechi(cursor.getString(cursor.getColumnIndex(COLUMN_NAME)));
+            khoanChi.setSotienchi(cursor.getFloat(cursor.getColumnIndex(COLUMN_SOTIEN)));
             try {
                 khoanChi.setNgaychi((Date) sdf.parse(cursor.getString(cursor.getColumnIndex(COLUMN_NGAYCHI))));
             } catch (ParseException e) {

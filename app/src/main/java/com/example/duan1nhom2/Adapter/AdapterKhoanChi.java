@@ -41,12 +41,12 @@ public class AdapterKhoanChi extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_thu, parent, false);
+        convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_chi, parent, false);
         KhoanChi khoanChi = (KhoanChi) getItem(position);
 
         TextView tv_ngaychi = convertView.findViewById(R.id.ngayChi);
-        TextView tv_name = convertView.findViewById(R.id.nameThu);
-        TextView tv_sotien = convertView.findViewById(R.id.sotienThu);
+        TextView tv_name = convertView.findViewById(R.id.nameChi);
+        TextView tv_sotien = convertView.findViewById(R.id.sotienChi);
         ImageView img_tchi = convertView.findViewById(R.id.img_chi);
         ImageView img_delete = convertView.findViewById(R.id.delete_Chi);
         ImageView img_update = convertView.findViewById(R.id.update_Chi);
