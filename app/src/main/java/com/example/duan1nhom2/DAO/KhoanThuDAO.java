@@ -54,9 +54,9 @@ public class KhoanThuDAO {
         return sqLiteDatabase.update(TABLE_NAME, contentValues, COLUMN_IDTHU + "=?", new String[]{String.valueOf(khoanThu.getIdthu())});
     }
 
-    public long deleteKhoanThu(KhoanThu khoanThu) {
+    public long deleteKhoanThu(String id) {
         SQLiteDatabase sqLiteDatabase = dataBase.getWritableDatabase();
-        return sqLiteDatabase.delete(TABLE_NAME, COLUMN_IDTHU + "=?", new String[]{String.valueOf(khoanThu.getIdthu())});
+        return sqLiteDatabase.delete(TABLE_NAME, COLUMN_NAME + "=?", new String[]{id});
     }
 
     public List<KhoanThu> getAllKhoanThu() {

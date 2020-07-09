@@ -3,42 +3,65 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal">
-    <ImageView
-        android:id="@+id/img_chi"
-        android:layout_width="60dp"
-        android:layout_height="60dp"/>
-
     <LinearLayout
-        android:layout_width="280dp"
-        android:layout_height="60dp"
-        android:orientation="vertical">
+        android:background="@color/colorMoney"
+        android:padding="5dp"
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+        <ImageView
+            android:id="@+id/img_chi"
+            android:src="@drawable/ic_money"
+            android:layout_width="60dp"
+            android:layout_height="60dp"/>
 
-        <TextView
-            android:id="@+id/ngayChi"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="260dp"
+            android:layout_height="60dp"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/nameChi"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/ngayChi"
+                android:gravity="center"
+                android:text="Ngày"
+                android:textSize="10dp"
+                android:textStyle="bold"
+                android:textColor="@color/colorText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/sotienChi"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/nameChi"
+                android:textStyle="italic|bold"
+                android:text="Tên"
+                android:layout_marginLeft="20dp"
+                android:textSize="18dp"
+                android:textColor="@color/colorText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:textStyle="italic|bold"
+                android:textColor="@color/colorText"
+                android:id="@+id/sotienChi"
+                android:text="Money"
+                android:layout_marginLeft="20dp"
+                android:textSize="18dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/update_Chi"
+            android:layout_width="36dp"
+            android:layout_height="60dp"
+            android:src="@drawable/ic_edit_24dp" />
+
+        <ImageView
+            android:id="@+id/delete_Chi"
+            android:layout_width="36dp"
+            android:layout_height="60dp"
+            android:src="@drawable/ic_delete_24dp" />
     </LinearLayout>
-
-    <ImageView
-        android:id="@+id/delete_Chi"
-        android:layout_width="36dp"
-        android:layout_height="60dp"
-        android:src="@drawable/ic_edit_24dp" />
-
-    <ImageView
-        android:id="@+id/update_Chi"
-        android:layout_width="36dp"
-        android:layout_height="60dp"
-        android:src="@drawable/ic_delete_24dp" />
 
 </LinearLayout>

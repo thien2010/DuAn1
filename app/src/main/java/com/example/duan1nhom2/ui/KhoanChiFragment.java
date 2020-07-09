@@ -59,12 +59,12 @@ public class KhoanChiFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                View view1 = LayoutInflater.from(getContext()).inflate(R.layout.add_chi,null);
+                View view1 = LayoutInflater.from(getContext()).inflate(R.layout.add_chi, null);
                 builder.setView(view1);
 
                 final EditText edt_namechi = view1.findViewById(R.id.edt_nameChi);
                 final EditText edt_sotienchi = view1.findViewById(R.id.edt_stChi);
-                final TextView tv_ngaychi =  view1.findViewById(R.id.tv_date_chi);
+                final TextView tv_ngaychi = view1.findViewById(R.id.tv_date_chi);
                 Button btn_datepiker = view1.findViewById(R.id.btn_datePicker);
 
                 btn_datepiker.setOnClickListener(new View.OnClickListener() {
