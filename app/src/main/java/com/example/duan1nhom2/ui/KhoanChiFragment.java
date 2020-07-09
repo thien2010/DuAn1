@@ -2,6 +2,7 @@ package com.example.duan1nhom2.ui;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -65,8 +66,6 @@ public class KhoanChiFragment extends Fragment {
                 final EditText edt_sotienchi = view1.findViewById(R.id.edt_stChi);
                 final TextView tv_ngaychi =  view1.findViewById(R.id.tv_date_chi);
                 Button btn_datepiker = view1.findViewById(R.id.btn_datePicker);
-                Button themchi = view1.findViewById(R.id.btn_themChi);
-                Button huychi = view1.findViewById(R.id.btn_huyChi);
 
                 btn_datepiker.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -86,9 +85,15 @@ public class KhoanChiFragment extends Fragment {
                         datePickerDialog.show();
                     }
                 });
-                themchi.setOnClickListener(new View.OnClickListener() {
+                builder.setPositiveButton("Hủy", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(View v) {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                builder.setNegativeButton("Thêm", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
                         Date date = null;
                         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
                         try {
