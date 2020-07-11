@@ -23,7 +23,7 @@ public class KhoanThuDAO {
     public static final String COLUMN_NGAYTHU = "ngaythu";
 
     public static final String SQL_KHOANTHU = "CREATE TABLE " + TABLE_NAME + " ( " +
-            COLUMN_IDTHU + " text primary key, " + COLUMN_NAME + " text, " + COLUMN_SOTIEN + " float, " + COLUMN_NGAYTHU + " date)";
+            COLUMN_IDTHU + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_NAME + " text, " + COLUMN_SOTIEN + " float, " + COLUMN_NGAYTHU + " date)";
 
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -54,9 +54,9 @@ public class KhoanThuDAO {
         return sqLiteDatabase.update(TABLE_NAME, contentValues, COLUMN_IDTHU + "=?", new String[]{String.valueOf(khoanThu.getIdthu())});
     }
 
-    public long deleteKhoanThu(String id) {
+    public long deleteKhoanThu(int id) {
         SQLiteDatabase sqLiteDatabase = dataBase.getWritableDatabase();
-        return sqLiteDatabase.delete(TABLE_NAME, COLUMN_NAME + "=?", new String[]{id});
+        return sqLiteDatabase.delete(TABLE_NAME, COLUMN_IDTHU + "=?", new String[]{String.valueOf(id)});
     }
 
     public List<KhoanThu> getAllKhoanThu() {

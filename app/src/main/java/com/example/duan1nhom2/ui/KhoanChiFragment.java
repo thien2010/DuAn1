@@ -49,6 +49,7 @@ public class KhoanChiFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_khoan_chi, container, false);
         lv_khoanchi = view.findViewById(R.id.lv_khoanChi);
         floatingActionButton = view.findViewById(R.id.btn_themChi);
+
         dataBase = new DataBase(getActivity());
         khoanChiDAO = new KhoanChiDAO(dataBase);
         khoanChis = khoanChiDAO.getAllKhoanChi();
@@ -105,6 +106,7 @@ public class KhoanChiFragment extends Fragment {
                         khoanChi.setNamechi(edt_namechi.getText().toString());
                         khoanChi.setSotienchi(Float.valueOf(edt_sotienchi.getText().toString()));
                         khoanChi.setNgaychi(date);
+
                         dataBase = new DataBase(getActivity());
                         KhoanChiDAO khoanChiDAO;
                         khoanChiDAO = new KhoanChiDAO(dataBase);
@@ -114,7 +116,7 @@ public class KhoanChiFragment extends Fragment {
                         } else {
                             Toast.makeText(getActivity(), "Thất bại", Toast.LENGTH_SHORT).show();
                         }
-                        khoanChis.add(khoanChi);
+                        khoanChis = khoanChiDAO.getAllKhoanChi();
                         adapterKhoanChi.setDatachange(khoanChis);
                     }
                 });

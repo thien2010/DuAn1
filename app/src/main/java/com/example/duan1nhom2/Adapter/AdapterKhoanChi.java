@@ -75,7 +75,7 @@ public class AdapterKhoanChi extends BaseAdapter {
                             public void onClick(DialogInterface dialog, int which) {
                                 dataBase = new DataBase(parent.getContext());
                                 khoanChiDAO = new KhoanChiDAO(dataBase);
-                                khoanChiDAO.deleteKhoanChi(khoanChi.getNamechi());
+                                khoanChiDAO.deleteKhoanChi(khoanChi.getIdchi());
                                 setDatachange(khoanChiDAO.getAllKhoanChi());
                             }
                         })

@@ -97,10 +97,12 @@ public class KhoanThuFragment extends Fragment {
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
+
                         KhoanThu khoanThu = new KhoanThu();
                         khoanThu.setNamethu(edt_namethu.getText().toString());
                         khoanThu.setSotien(Float.valueOf(edt_sotien.getText().toString()));
                         khoanThu.setNgaythu(date);
+
                         dataBase = new DataBase(getActivity());
                         KhoanThuDAO khoanThuDAO;
                         khoanThuDAO = new KhoanThuDAO(dataBase);
@@ -110,7 +112,7 @@ public class KhoanThuFragment extends Fragment {
                         } else {
                             Toast.makeText(getActivity(), "Thất bại", Toast.LENGTH_SHORT).show();
                         }
-                        khoanThus.add(khoanThu);
+                        khoanThus = khoanThuDAO.getAllKhoanThu();
                         adapterKhoanThu.setDatachange(khoanThus);
                     }
                 });

@@ -24,7 +24,7 @@ public class KhoanChiDAO {
     public static final String COLUMN_NGAYCHI = "ngaychi";
 
     public static final String SQL_KHOANCHI = "CREATE TABLE " + TABLE_NAME + " ( " +
-            COLUMN_IDCHI + " text primary key, "+ COLUMN_NAME + " text," + COLUMN_SOTIEN + " float," + COLUMN_NGAYCHI + " date);";
+            COLUMN_IDCHI + " INTEGER PRIMARY KEY AUTOINCREMENT,"+ COLUMN_NAME + " text," + COLUMN_SOTIEN + " float," + COLUMN_NGAYCHI + " date);";
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     public KhoanChiDAO(DataBase dataBase) {
@@ -33,7 +33,6 @@ public class KhoanChiDAO {
 
     public long insertKhoanChi(KhoanChi khoanChi){
         SQLiteDatabase sqLiteDatabase = dataBase.getWritableDatabase();
-
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_NAME,khoanChi.getNamechi());
         contentValues.put(COLUMN_SOTIEN,khoanChi.getSotienchi());
@@ -44,7 +43,6 @@ public class KhoanChiDAO {
 
     public long updateKhoanChi(KhoanChi khoanChi){
         SQLiteDatabase sqLiteDatabase = dataBase.getWritableDatabase();
-
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_NAME,khoanChi.getNamechi());
         contentValues.put(COLUMN_SOTIEN,khoanChi.getSotienchi());
@@ -53,9 +51,9 @@ public class KhoanChiDAO {
         return sqLiteDatabase.update(TABLE_NAME,contentValues,COLUMN_IDCHI + "=?", new String[]{String.valueOf(khoanChi.getIdchi())});
     }
 
-    public long deleteKhoanChi(String id){
+    public long deleteKhoanChi(int id){
         SQLiteDatabase sqLiteDatabase = dataBase.getWritableDatabase();
-        return sqLiteDatabase.delete(TABLE_NAME,COLUMN_NAME + "=?", new String[]{id});
+        return sqLiteDatabase.delete(TABLE_NAME,COLUMN_IDCHI + "=?", new String[]{String.valueOf(id)});
     }
 
     public List<KhoanChi> getAllKhoanChi(){

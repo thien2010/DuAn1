@@ -3,6 +3,7 @@ package com.example.duan1nhom2.Adapter;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,9 +72,11 @@ public class AdapterKhoanThu extends BaseAdapter {
                         .setNegativeButton("Xóa", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                 dataBase = new DataBase(parent.getContext());
+                                dataBase = new DataBase(parent.getContext());
                                 khoanThuDAO = new KhoanThuDAO(dataBase);
-                                khoanThuDAO.deleteKhoanThu(khoanThu.getNamethu());
+                                int id = khoanThu.getIdthu();
+                                khoanThuDAO.deleteKhoanThu(id);
+                                Log.e("id",""+id);
                                 setDatachange(khoanThuDAO.getAllKhoanThu());
                             }
                         })
