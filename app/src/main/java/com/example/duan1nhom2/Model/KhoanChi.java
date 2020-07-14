@@ -5,13 +5,13 @@ import java.util.Date;
 public class KhoanChi {
     private int idchi;
     private String namechi;
-    private float sotienchi;
+    private int sotienchi;
     private Date ngaychi;
 
     public KhoanChi() {
     }
 
-    public KhoanChi(int idchi, String namechi, float sotienchi, Date ngaychi) {
+    public KhoanChi(int idchi, String namechi, int sotienchi, Date ngaychi) {
         this.idchi = idchi;
         this.namechi = namechi;
         this.sotienchi = sotienchi;
@@ -34,11 +34,11 @@ public class KhoanChi {
         this.namechi = namechi;
     }
 
-    public float getSotienchi() {
+    public int getSotienchi() {
         return sotienchi;
     }
 
-    public void setSotienchi(float sotienchi) {
+    public void setSotienchi(int sotienchi) {
         this.sotienchi = sotienchi;
     }
 

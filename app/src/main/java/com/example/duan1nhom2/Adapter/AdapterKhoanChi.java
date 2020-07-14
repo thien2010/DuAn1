@@ -63,7 +63,7 @@ public class AdapterKhoanChi extends BaseAdapter {
 
         tv_ngaychi.setText(s);
         tv_name.setText("Chi: "+khoanChi.getNamechi());
-        tv_sotien.setText("Số Tiền: "+khoanChi.getSotienchi() + " $");
+        tv_sotien.setText("Số Tiền: "+khoanChi.getSotienchi() + "$");
 
         img_delete.setOnClickListener(new View.OnClickListener() {
             @Override

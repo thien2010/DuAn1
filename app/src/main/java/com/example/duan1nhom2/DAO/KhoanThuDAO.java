@@ -23,7 +23,7 @@ public class KhoanThuDAO {
     public static final String COLUMN_NGAYTHU = "ngaythu";
 
     public static final String SQL_KHOANTHU = "CREATE TABLE " + TABLE_NAME + " ( " +
-            COLUMN_IDTHU + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_NAME + " text, " + COLUMN_SOTIEN + " float, " + COLUMN_NGAYTHU + " date)";
+            COLUMN_IDTHU + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_NAME + " text, " + COLUMN_SOTIEN + " INTERGER, " + COLUMN_NGAYTHU + " date)";
 
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -69,7 +69,7 @@ public class KhoanThuDAO {
             KhoanThu khoanThu = new KhoanThu();
             khoanThu.setIdthu(cursor.getInt(cursor.getColumnIndex(COLUMN_IDTHU)));
             khoanThu.setNamethu(cursor.getString(cursor.getColumnIndex(COLUMN_NAME)));
-            khoanThu.setSotien(cursor.getFloat(cursor.getColumnIndex(COLUMN_SOTIEN)));
+            khoanThu.setSotien(cursor.getInt(cursor.getColumnIndex(COLUMN_SOTIEN)));
             try {
                 khoanThu.setNgaythu((Date) sdf.parse(cursor.getString(cursor.getColumnIndex(COLUMN_NGAYTHU))));
             } catch (ParseException e) {
@@ -80,5 +80,20 @@ public class KhoanThuDAO {
         }
         cursor.close();
         return thuList;
+    }
+
+    public int tongThu() {
+        SQLiteDatabase sqLiteDatabase = dataBase.getWritableDatabase();
+        int tongThu = 0;
+        String sSQL = "SELECT SUM(sotienthu) as 'tongThu'" +
+                " FROM khoanthu ";
+        Cursor c = sqLiteDatabase.rawQuery(sSQL, null);
+        c.moveToFirst();
+        while (!c.isAfterLast()) {
+            tongThu = c.getInt(0);
+            c.moveToNext();
+        }
+        c.close();
+        return tongThu;
     }
 }

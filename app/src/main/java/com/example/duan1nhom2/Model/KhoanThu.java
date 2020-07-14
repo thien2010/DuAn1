@@ -5,10 +5,17 @@ import java.util.Date;
 public class KhoanThu {
     private int idthu;
     private String namethu;
-    private float sotien;
+    private int sotien;
     private Date ngaythu;
 
     public KhoanThu() {
+    }
+
+    public KhoanThu(int idthu, String namethu, int sotien, Date ngaythu) {
+        this.idthu = idthu;
+        this.namethu = namethu;
+        this.sotien = sotien;
+        this.ngaythu = ngaythu;
     }
 
     public int getIdthu() {
@@ -27,11 +34,11 @@ public class KhoanThu {
         this.namethu = namethu;
     }
 
-    public float getSotien() {
+    public int getSotien() {
         return sotien;
     }
 
-    public void setSotien(float sotien) {
+    public void setSotien(int sotien) {
         this.sotien = sotien;
     }
 

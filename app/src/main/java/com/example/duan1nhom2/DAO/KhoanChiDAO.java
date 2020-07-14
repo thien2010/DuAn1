@@ -24,7 +24,7 @@ public class KhoanChiDAO {
     public static final String COLUMN_NGAYCHI = "ngaychi";
 
     public static final String SQL_KHOANCHI = "CREATE TABLE " + TABLE_NAME + " ( " +
-            COLUMN_IDCHI + " INTEGER PRIMARY KEY AUTOINCREMENT,"+ COLUMN_NAME + " text," + COLUMN_SOTIEN + " float," + COLUMN_NGAYCHI + " date);";
+            COLUMN_IDCHI + " INTEGER PRIMARY KEY AUTOINCREMENT,"+ COLUMN_NAME + " text," + COLUMN_SOTIEN + " INTERGER," + COLUMN_NGAYCHI + " date);";
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     public KhoanChiDAO(DataBase dataBase) {
@@ -68,7 +68,7 @@ public class KhoanChiDAO {
             KhoanChi khoanChi = new KhoanChi();
             khoanChi.setIdchi(cursor.getInt(cursor.getColumnIndex(COLUMN_IDCHI)));
             khoanChi.setNamechi(cursor.getString(cursor.getColumnIndex(COLUMN_NAME)));
-            khoanChi.setSotienchi(cursor.getFloat(cursor.getColumnIndex(COLUMN_SOTIEN)));
+            khoanChi.setSotienchi(cursor.getInt(cursor.getColumnIndex(COLUMN_SOTIEN)));
             try {
                 khoanChi.setNgaychi((Date) sdf.parse(cursor.getString(cursor.getColumnIndex(COLUMN_NGAYCHI))));
             } catch (ParseException e) {
@@ -79,5 +79,19 @@ public class KhoanChiDAO {
         }
         cursor.close();
         return chiList;
+    }
+    public int tongChi() {
+        SQLiteDatabase sqLiteDatabase = dataBase.getWritableDatabase();
+        int tongChi = 0;
+        String sSQL = "SELECT SUM(sotienchi) as 'tongChi'" +
+                " FROM khoanchi ";
+        Cursor c = sqLiteDatabase.rawQuery(sSQL, null);
+        c.moveToFirst();
+        while (!c.isAfterLast()) {
+            tongChi = c.getInt(0);
+            c.moveToNext();
+        }
+        c.close();
+        return tongChi;
     }
 }

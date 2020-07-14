@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.duan1nhom2.Adapter.AdapterKhoanChi;
 import com.example.duan1nhom2.DAO.KhoanChiDAO;
+import com.example.duan1nhom2.DAO.KhoanThuDAO;
 import com.example.duan1nhom2.DataBase.DataBase;
 import com.example.duan1nhom2.Model.KhoanChi;
 import com.example.duan1nhom2.R;
@@ -38,6 +40,8 @@ public class KhoanChiFragment extends Fragment {
     List<KhoanChi> khoanChis;
     KhoanChiDAO khoanChiDAO;
     FloatingActionButton floatingActionButton;
+    TextView tv_tongTien;
+    KhoanThuDAO khoanThuDAO;
 
     public KhoanChiFragment() {
         // Required empty public constructor
@@ -53,8 +57,15 @@ public class KhoanChiFragment extends Fragment {
         dataBase = new DataBase(getActivity());
         khoanChiDAO = new KhoanChiDAO(dataBase);
         khoanChis = khoanChiDAO.getAllKhoanChi();
+        khoanThuDAO = new KhoanThuDAO(dataBase);
         adapterKhoanChi = new AdapterKhoanChi(getActivity(), khoanChis);
         lv_khoanchi.setAdapter(adapterKhoanChi);
+
+        tv_tongTien = view.findViewById(R.id.tv_tongTien);
+        int Thu = khoanThuDAO.tongThu();
+        int Chi = khoanChiDAO.tongChi();
+        Log.e("Thu",""+ (Thu - Chi));
+        tv_tongTien.setText("Tổng Tiền: " + (Thu - Chi)+"$");
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,7 +115,7 @@ public class KhoanChiFragment extends Fragment {
                         }
                         KhoanChi khoanChi = new KhoanChi();
                         khoanChi.setNamechi(edt_namechi.getText().toString());
-                        khoanChi.setSotienchi(Float.valueOf(edt_sotienchi.getText().toString()));
+                        khoanChi.setSotienchi(Integer.valueOf(edt_sotienchi.getText().toString()));
                         khoanChi.setNgaychi(date);
 
                         dataBase = new DataBase(getActivity());
@@ -117,6 +128,10 @@ public class KhoanChiFragment extends Fragment {
                             Toast.makeText(getActivity(), "Thất bại", Toast.LENGTH_SHORT).show();
                         }
                         khoanChis = khoanChiDAO.getAllKhoanChi();
+                        int Thu = khoanThuDAO.tongThu();
+                        int Chi = khoanChiDAO.tongChi();
+                        Log.e("Thu",""+ (Thu - Chi));
+                        tv_tongTien.setText("Tổng Tiền: " + (Thu - Chi));
                         adapterKhoanChi.setDatachange(khoanChis);
                     }
                 });

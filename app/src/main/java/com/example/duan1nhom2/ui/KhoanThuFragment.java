@@ -9,6 +9,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.duan1nhom2.Adapter.AdapterKhoanThu;
+import com.example.duan1nhom2.DAO.KhoanChiDAO;
 import com.example.duan1nhom2.DAO.KhoanThuDAO;
 import com.example.duan1nhom2.DataBase.DataBase;
 import com.example.duan1nhom2.Model.KhoanThu;
@@ -40,6 +42,8 @@ public class KhoanThuFragment extends Fragment {
     List<KhoanThu> khoanThus;
     KhoanThuDAO khoanThuDAO;
     FloatingActionButton floatingActionButton;
+    KhoanChiDAO khoanChiDAO;
+    TextView tv_tongTien;
 
     public View onCreateView(@NonNull final LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -49,8 +53,15 @@ public class KhoanThuFragment extends Fragment {
         dataBase = new DataBase(getActivity());
         khoanThuDAO = new KhoanThuDAO(dataBase);
         khoanThus = khoanThuDAO.getAllKhoanThu();
+        khoanChiDAO = new KhoanChiDAO(dataBase);
         adapterKhoanThu = new AdapterKhoanThu(getActivity(), khoanThus);
         lv_khoanthu.setAdapter(adapterKhoanThu);
+        tv_tongTien = view.findViewById(R.id.tv_tongTien);
+        int Thu = khoanThuDAO.tongThu();
+        int Chi = khoanChiDAO.tongChi();
+        Log.e("Thu",""+ (Thu - Chi));
+        tv_tongTien.setText("Tổng Tiền: " + (Thu - Chi)+"$");
+
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,6 +101,7 @@ public class KhoanThuFragment extends Fragment {
                 builder.setNegativeButton("Thêm", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+
                         Date date = null;
                         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
                         try {
@@ -100,7 +112,7 @@ public class KhoanThuFragment extends Fragment {
 
                         KhoanThu khoanThu = new KhoanThu();
                         khoanThu.setNamethu(edt_namethu.getText().toString());
-                        khoanThu.setSotien(Float.valueOf(edt_sotien.getText().toString()));
+                        khoanThu.setSotien(Integer.valueOf(edt_sotien.getText().toString()));
                         khoanThu.setNgaythu(date);
 
                         dataBase = new DataBase(getActivity());
@@ -113,6 +125,10 @@ public class KhoanThuFragment extends Fragment {
                             Toast.makeText(getActivity(), "Thất bại", Toast.LENGTH_SHORT).show();
                         }
                         khoanThus = khoanThuDAO.getAllKhoanThu();
+                        double Thu = khoanThuDAO.tongThu();
+                        double Chi = khoanChiDAO.tongChi();
+                        Log.e("Thu",""+ (Thu - Chi));
+                        tv_tongTien.setText("Tổng Tiền: " + (Thu - Chi));
                         adapterKhoanThu.setDatachange(khoanThus);
                     }
                 });
