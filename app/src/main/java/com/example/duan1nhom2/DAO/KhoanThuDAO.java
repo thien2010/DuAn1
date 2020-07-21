@@ -41,8 +41,6 @@ public class KhoanThuDAO {
         return sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
     }
 
-
-
     public long updateKhoanThu(KhoanThu khoanThu) {
         SQLiteDatabase sqLiteDatabase = dataBase.getWritableDatabase();
 
@@ -95,5 +93,21 @@ public class KhoanThuDAO {
         }
         c.close();
         return tongThu;
+    }
+
+    public int tongThuTheoNgay(int day) {
+        SQLiteDatabase sqLiteDatabase = dataBase.getWritableDatabase();
+        int tongThuTheoNgay = 0;
+        String sSQL = "SELECT idthu, SUM(sotienthu) as 'tongthu'"+
+                " FROM khoanthu" +
+                " where strftime('%d',khoanthu.ngaythu) = '"+ day +"' GROUP BY khoanthu.idthu)tmp";
+        Cursor c = sqLiteDatabase.rawQuery(sSQL, null);
+        c.moveToFirst();
+        while (!c.isAfterLast()) {
+            tongThuTheoNgay = c.getInt(0);
+            c.moveToNext();
+        }
+        c.close();
+        return tongThuTheoNgay;
     }
 }

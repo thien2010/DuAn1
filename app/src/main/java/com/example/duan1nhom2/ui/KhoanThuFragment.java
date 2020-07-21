@@ -30,7 +30,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -62,14 +61,12 @@ public class KhoanThuFragment extends Fragment {
         Log.e("Thu",""+ (Thu - Chi));
         tv_tongTien.setText("Tổng Tiền: " + (Thu - Chi)+"$");
 
-
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 View view1 = LayoutInflater.from(getContext()).inflate(R.layout.add_thu,null);
                 builder.setView(view1);
-
                 final EditText edt_namethu = view1.findViewById(R.id.edt_nameThu);
                 final EditText edt_sotien = view1.findViewById(R.id.edt_stThu);
                 final TextView tv_ngaythu =  view1.findViewById(R.id.tv_date);
