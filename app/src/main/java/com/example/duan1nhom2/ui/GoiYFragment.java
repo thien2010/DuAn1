@@ -27,6 +27,7 @@ public class GoiYFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_goi_y, container, false);
+        edt_goiy = view.findViewById(R.id.edt_goiy);
         tv_one = view.findViewById(R.id.hu1);
         tv_two = view.findViewById(R.id.hu2);
         tv_three = view.findViewById(R.id.hu3);

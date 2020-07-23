@@ -79,7 +79,7 @@ public class AdapterKhoanChi extends BaseAdapter {
                 final TextView update_ngaychi = view.findViewById(R.id.update_ngaychi);
                 final EditText update_sotien_chi = view.findViewById(R.id.update_sotienchi);
                 final EditText update_namechi = view.findViewById(R.id.update_namechi);
-                Button datepicker_ngaychi = view.findViewById(R.id.update_ngaychi);
+                Button datepicker_ngaychi = view.findViewById(R.id.datepicker_chi);
                 datepicker_ngaychi.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
