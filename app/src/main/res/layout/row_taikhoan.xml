@@ -12,10 +12,10 @@
         android:padding="5dp">
 
         <ImageView
-            android:id="@+id/img_chi"
+            android:id="@+id/img_thu"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:src="@drawable/ic_money" />
+            android:src="@drawable/user" />
 
         <LinearLayout
             android:layout_width="220dp"
@@ -25,43 +25,42 @@
             android:paddingLeft="8dp">
 
             <TextView
-                android:id="@+id/nameChi"
+                android:id="@+id/userName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Khoản chi: "
+                android:text="Username "
                 android:textColor="#000"
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/sotienChi"
+                android:id="@+id/fullName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Số tiền:"
+                android:text="Full Name"
                 android:textColor="#000"
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/ngayChi"
+                android:id="@+id/phoneNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ngày chi:"
+                android:text="Phone number"
                 android:textColor="#000"
                 android:textSize="16sp" />
         </LinearLayout>
+
         <ImageView
-            android:id="@+id/update_Chi"
-            android:layout_marginLeft="30dp"
+            android:id="@+id/update_Thu"
             android:layout_width="36dp"
+            android:layout_marginLeft="30dp"
             android:layout_height="60dp"
             android:src="@drawable/ic_sua" />
 
         <ImageView
-            android:id="@+id/delete_Chi"
+            android:id="@+id/delete_Thu"
             android:layout_width="36dp"
             android:layout_height="60dp"
             android:src="@drawable/ic_xoa" />
-
     </LinearLayout>
-
 
 </LinearLayout>

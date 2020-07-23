@@ -27,14 +27,13 @@ public class GoiYFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_goi_y, container, false);
-        tv_one = view.findViewById(R.id.tv_one);
-        tv_two = view.findViewById(R.id.tv_two);
-        tv_three = view.findViewById(R.id.tv_three);
-        tv_four = view.findViewById(R.id.tv_four);
-        tv_five = view.findViewById(R.id.tv_five);
-        tv_six = view.findViewById(R.id.tv_six);
-        edt_goiy = view.findViewById(R.id.edt_goiy);
-        btn_goiy = view.findViewById(R.id.btn_goiy);
+        tv_one = view.findViewById(R.id.hu1);
+        tv_two = view.findViewById(R.id.hu2);
+        tv_three = view.findViewById(R.id.hu3);
+        tv_four = view.findViewById(R.id.hu4);
+        tv_five = view.findViewById(R.id.hu5);
+        tv_six = view.findViewById(R.id.hu6);
+        btn_goiy = view.findViewById(R.id.btngoiy);
         btn_goiy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,4 +48,5 @@ public class GoiYFragment extends Fragment {
         });
         return view;
     }
+
 }

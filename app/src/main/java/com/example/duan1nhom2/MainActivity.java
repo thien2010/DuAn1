@@ -1,6 +1,8 @@
 package com.example.duan1nhom2;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.duan1nhom2.DAO.KhoanChiDAO;
@@ -8,6 +10,7 @@ import com.example.duan1nhom2.DAO.KhoanThuDAO;
 import com.example.duan1nhom2.DataBase.DataBase;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -18,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     KhoanThuDAO khoanThuDAO;
     KhoanChiDAO khoanChiDAO;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,5 +36,25 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
+    }
+
+    // code menu tại đây nhé
+    // đã set sẵn id
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.my_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.item_taikhoan:
+                break;
+            case R.id.item_dangxuat:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -55,11 +55,6 @@ public class KhoanThuFragment extends Fragment {
         khoanChiDAO = new KhoanChiDAO(dataBase);
         adapterKhoanThu = new AdapterKhoanThu(getActivity(), khoanThus);
         lv_khoanthu.setAdapter(adapterKhoanThu);
-        tv_tongTien = view.findViewById(R.id.tv_tongTien);
-        int Thu = khoanThuDAO.tongThu();
-        int Chi = khoanChiDAO.tongChi();
-        Log.e("Thu",""+ (Thu - Chi));
-        tv_tongTien.setText("Tổng Tiền: " + (Thu - Chi)+"$");
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,10 +117,6 @@ public class KhoanThuFragment extends Fragment {
                             Toast.makeText(getActivity(), "Thất bại", Toast.LENGTH_SHORT).show();
                         }
                         khoanThus = khoanThuDAO.getAllKhoanThu();
-                        double Thu = khoanThuDAO.tongThu();
-                        double Chi = khoanChiDAO.tongChi();
-                        Log.e("Thu",""+ (Thu - Chi));
-                        tv_tongTien.setText("Tổng Tiền: " + (Thu - Chi));
                         adapterKhoanThu.setDatachange(khoanThus);
                     }
                 });

@@ -35,33 +35,32 @@ public class ThongKeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_thong_ke, container, false);
-        dataBase = new DataBase(getActivity());
-        khoanThuDAO = new KhoanThuDAO(dataBase);
-        thuList = khoanThuDAO.getAllKhoanThu();
-        final TextView tongthutheongay = view.findViewById(R.id.tv_tongthutheongay);
-        final TextView date = view.findViewById(R.id.tv_date);
-        Button btn_datepiker = view.findViewById(R.id.btn_datePicker1);
-
-        btn_datepiker.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Calendar calendar = Calendar.getInstance();
-                int year = calendar.get(Calendar.YEAR);
-                int month = calendar.get(Calendar.MONTH);
-                final int day = calendar.get(Calendar.DAY_OF_MONTH);
-                DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        calendar.set(year, month, dayOfMonth);
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                        date.setText(simpleDateFormat.format(calendar.getTime()));
-                    }
-                }, year, month, day);
-                datePickerDialog.show();
-            }
-        });
-//        int thungay = khoanThuDAO.tongThuTheoNgay(Integer.parseInt(date.getText().toString()));
-//        tongthutheongay.setText("Tong thu theo ngay: " + thungay);
+//        dataBase = new DataBase(getActivity());
+//        khoanThuDAO = new KhoanThuDAO(dataBase);
+//        thuList = khoanThuDAO.getAllKhoanThu();
+//
+//        Button btn_datepiker = view.findViewById(R.id.btn_datePicker1);
+//
+//        btn_datepiker.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                final Calendar calendar = Calendar.getInstance();
+//                int year = calendar.get(Calendar.YEAR);
+//                int month = calendar.get(Calendar.MONTH);
+//                final int day = calendar.get(Calendar.DAY_OF_MONTH);
+//                DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+//                    @Override
+//                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+//                        calendar.set(year, month, dayOfMonth);
+//                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//                        date.setText(simpleDateFormat.format(calendar.getTime()));
+//                    }
+//                }, year, month, day);
+//                datePickerDialog.show();
+//            }
+//        });
+////        int thungay = khoanThuDAO.tongThuTheoNgay(Integer.parseInt(date.getText().toString()));
+////        tongthutheongay.setText("Tong thu theo ngay: " + thungay);
         return view;
     }
 }

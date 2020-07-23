@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="16dp"
-        android:text="Thêm Khoản Thu"
+        android:text="Sửa Khoản Thu"
         android:textColor="#000"
         android:textSize="20dp"
         android:textStyle="bold" />
@@ -23,7 +23,7 @@
         android:hint="Tên khoản thu">
 
         <EditText
-            android:id="@+id/edt_nameThu"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -34,7 +34,7 @@
         android:hint="Số tiền">
 
         <EditText
-            android:id="@+id/edt_stThu"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -45,14 +45,14 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/tv_date"
+
             android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:hint=" Ngày Thu"
             android:textSize="18dp" />
 
         <Button
-            android:id="@+id/btn_datePicker"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"

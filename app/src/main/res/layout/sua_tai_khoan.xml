@@ -1,29 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingLeft="8dp">
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
         android:layout_marginTop="16dp"
-        android:text="Thêm Khoản Thu"
+        android:gravity="center_horizontal"
+        android:text="Sửa thông tin tài khoản"
         android:textColor="#000"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Tên khoản thu">
+        android:hint="Password">
 
         <EditText
-            android:id="@+id/edt_nameThu"
+            android:id="@+id/edt_sua_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -31,39 +30,34 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Số tiền">
+        android:hint="Full Name">
 
         <EditText
-            android:id="@+id/edt_stThu"
+            android:id="@+id/edt_sua_fullName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
-
-    <LinearLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:hint="Phone Number">
 
-        <TextView
-            android:id="@+id/tv_date"
-            android:layout_width="230dp"
-            android:layout_height="wrap_content"
-            android:hint=" Ngày Thu"
-            android:textSize="18dp" />
-
-        <Button
-            android:id="@+id/btn_datePicker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:background="@color/colorPrimary"
-            android:text="Date"
-            android:textAllCaps="false"
-            android:textColor="#fff" />
-    </LinearLayout>
+        <EditText
+            android:id="@+id/edt_sua_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:hint="Email">
+
+        <EditText
+            android:id="@+id/edt_sua_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
 
 </LinearLayout>
