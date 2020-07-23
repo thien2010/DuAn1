@@ -11,6 +11,12 @@ public class KhoanChi {
     public KhoanChi() {
     }
 
+    public KhoanChi(String namechi, int sotienchi, Date ngaychi) {
+        this.namechi = namechi;
+        this.sotienchi = sotienchi;
+        this.ngaychi = ngaychi;
+    }
+
     public KhoanChi(int idchi, String namechi, int sotienchi, Date ngaychi) {
         this.idchi = idchi;
         this.namechi = namechi;

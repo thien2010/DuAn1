@@ -1,6 +1,7 @@
 package com.example.duan1nhom2.Adapter;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.util.Log;
@@ -8,16 +9,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.duan1nhom2.DAO.KhoanChiDAO;
 import com.example.duan1nhom2.DAO.KhoanThuDAO;
 import com.example.duan1nhom2.DataBase.DataBase;
 import com.example.duan1nhom2.Model.KhoanThu;
 import com.example.duan1nhom2.R;
 
 import java.text.Format;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class AdapterKhoanThu extends BaseAdapter {
@@ -63,7 +71,63 @@ public class AdapterKhoanThu extends BaseAdapter {
         tv_ngaythu.setText(s);
         tv_name.setText("Nhận: "+khoanThu.getNamethu());
         tv_sotien.setText("Số Tiền: "+khoanThu.getSotien() + "$");
+        img_update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                View view = LayoutInflater.from(context).inflate(R.layout.sua_thu,null);
+                builder.setView(view);
+                final TextView update_ngaythu = view.findViewById(R.id.update_ngaythu);
+                final EditText update_sotien_thu = view.findViewById(R.id.update_sotienthu);
+                final EditText update_name_thu = view.findViewById(R.id.update_namethu);
+                Button datepicker_ngaythu = view.findViewById(R.id.datepicker_thu);
+                datepicker_ngaythu.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        final Calendar calendar = Calendar.getInstance();
+                        int year = calendar.get(Calendar.YEAR);
+                        int month = calendar.get(Calendar.MONTH);
+                        final int day = calendar.get(Calendar.DAY_OF_MONTH);
+                        DatePickerDialog datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                                calendar.set(year, month, dayOfMonth);
+                                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                                update_ngaythu.setText(simpleDateFormat.format(calendar.getTime()));
+                            }
+                        }, year, month, day);
+                        datePickerDialog.show();
+                    }
+                });
+                builder.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Date date = null;
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                        try {
+                            date = simpleDateFormat.parse(update_ngaythu.getText().toString());
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        khoanThu.setNamethu(update_name_thu.getText().toString());
+                        khoanThu.setSotien(Integer.valueOf(update_sotien_thu.getText().toString()));
+                        khoanThu.setNgaythu(date);
 
+                        dataBase = new DataBase(parent.getContext());
+                        khoanThuDAO = new KhoanThuDAO(dataBase);
+                        khoanThuDAO.updateKhoanThu(khoanThu);
+                        setDatachange(khoanThuDAO.getAllKhoanThu());
+                    }
+                });
+                builder.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                builder.create().show();
+            }
+        });
         img_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

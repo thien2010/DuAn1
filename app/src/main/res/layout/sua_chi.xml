@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="16dp"
-        android:text="Thêm Khoản Chi"
+        android:text="Sửa Khoản Chi"
         android:textColor="#000"
         android:textSize="20dp"
         android:textStyle="bold" />
@@ -23,7 +23,7 @@
         android:hint="Tên khoản chi">
 
         <EditText
-            android:id="@+id/upten_chi"
+            android:id="@+id/update_namechi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -34,7 +34,7 @@
         android:hint="Số tiền">
 
         <EditText
-            android:id="@+id/up_sotien"
+            android:id="@+id/update_sotienchi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -45,14 +45,14 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/tv_date1"
+            android:id="@+id/update_ngaychi"
             android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:hint=" Ngày chi"
             android:textSize="18dp" />
 
         <Button
-            android:id="@+id/btn_datePicker1"
+            android:id="@+id/datepicker_chi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
@@ -62,8 +62,5 @@
             android:textColor="#fff" />
     </LinearLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 
 </LinearLayout>

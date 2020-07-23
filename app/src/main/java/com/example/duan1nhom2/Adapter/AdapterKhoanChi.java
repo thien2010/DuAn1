@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -60,7 +61,6 @@ public class AdapterKhoanChi extends BaseAdapter {
         TextView tv_ngaychi = convertView.findViewById(R.id.ngayChi);
         TextView tv_name = convertView.findViewById(R.id.nameChi);
         TextView tv_sotien = convertView.findViewById(R.id.sotienChi);
-        ImageView img_tchi = convertView.findViewById(R.id.img_chi);
         ImageView img_delete = convertView.findViewById(R.id.delete_Chi);
         ImageView img_update = convertView.findViewById(R.id.update_Chi);
 
@@ -76,11 +76,11 @@ public class AdapterKhoanChi extends BaseAdapter {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 View view = LayoutInflater.from(context).inflate(R.layout.sua_chi,null);
                 builder.setView(view);
-                final TextView tv_date = view.findViewById(R.id.tv_date1);
-                TextView sotien = view.findViewById(R.id.up_sotien);
-                TextView name = view.findViewById(R.id.upten_chi);
-                Button btn_datepicker = view.findViewById(R.id.btn_datePicker1);
-                btn_datepicker.setOnClickListener(new View.OnClickListener() {
+                final TextView update_ngaychi = view.findViewById(R.id.update_ngaychi);
+                final EditText update_sotien_chi = view.findViewById(R.id.update_sotienchi);
+                final EditText update_namechi = view.findViewById(R.id.update_namechi);
+                Button datepicker_ngaychi = view.findViewById(R.id.update_ngaychi);
+                datepicker_ngaychi.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         final Calendar calendar = Calendar.getInstance();
@@ -92,7 +92,7 @@ public class AdapterKhoanChi extends BaseAdapter {
                             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                                 calendar.set(year, month, dayOfMonth);
                                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                                tv_date.setText(simpleDateFormat.format(calendar.getTime()));
+                                update_ngaychi.setText(simpleDateFormat.format(calendar.getTime()));
                             }
                         }, year, month, day);
                         datePickerDialog.show();
@@ -104,18 +104,17 @@ public class AdapterKhoanChi extends BaseAdapter {
                         Date date = null;
                         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
                         try {
-                            date = simpleDateFormat.parse(tv_date.getText().toString());
+                            date = simpleDateFormat.parse(update_ngaychi.getText().toString());
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
-                        KhoanChi khoanChi1 = new KhoanChi();
-                        khoanChi1.setNamechi(name.getText().toString());
-                        khoanChi1.setSotienchi(Integer.valueOf(sotien.getText().toString()));
-                        khoanChi1.setNgaychi(date);
+                        khoanChi.setNamechi(update_namechi.getText().toString());
+                        khoanChi.setSotienchi(Integer.valueOf(update_sotien_chi.getText().toString()));
+                        khoanChi.setNgaychi(date);
 
                         dataBase = new DataBase(parent.getContext());
                         khoanChiDAO = new KhoanChiDAO(dataBase);
-                        khoanChiDAO.updateKhoanChi(khoanChi1);
+                        khoanChiDAO.updateKhoanChi(khoanChi);
                         setDatachange(khoanChiDAO.getAllKhoanChi());
                     }
                 });
@@ -124,7 +123,8 @@ public class AdapterKhoanChi extends BaseAdapter {
                     public void onClick(DialogInterface dialog, int which) {
 
                     }
-                })
+                });
+                builder.create().show();
             }
         });
         img_delete.setOnClickListener(new View.OnClickListener() {
