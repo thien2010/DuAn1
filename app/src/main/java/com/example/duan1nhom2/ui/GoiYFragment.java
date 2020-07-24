@@ -19,13 +19,11 @@ public class GoiYFragment extends Fragment {
     Button btn_goiy;
     EditText edt_goiy;
     public GoiYFragment() {
-        // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_goi_y, container, false);
         edt_goiy = view.findViewById(R.id.edt_goiy);
         tv_one = view.findViewById(R.id.hu1);
@@ -49,5 +47,4 @@ public class GoiYFragment extends Fragment {
         });
         return view;
     }
-
 }
