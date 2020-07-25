@@ -3,6 +3,7 @@ package com.example.duan1nhom2.DAO;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.duan1nhom2.DataBase.DataBase;
 import com.example.duan1nhom2.Model.KhoanChi;
@@ -16,55 +17,55 @@ import java.util.List;
 
 public class KhoanChiDAO {
     DataBase dataBase;
-
+    String dateInput = null;
     public static final String TABLE_NAME = "khoanchi";
-    public static final String COLUMN_IDCHI= "idchi";
+    public static final String COLUMN_IDCHI = "idchi";
     public static final String COLUMN_NAME = "namechi";
     public static final String COLUMN_SOTIEN = "sotienchi";
     public static final String COLUMN_NGAYCHI = "ngaychi";
 
     public static final String SQL_KHOANCHI = "CREATE TABLE " + TABLE_NAME + " ( " +
-            COLUMN_IDCHI + " INTEGER PRIMARY KEY AUTOINCREMENT,"+ COLUMN_NAME + " text," + COLUMN_SOTIEN + " INTERGER," + COLUMN_NGAYCHI + " date);";
+            COLUMN_IDCHI + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_NAME + " text," + COLUMN_SOTIEN + " INTERGER," + COLUMN_NGAYCHI + " date);";
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     public KhoanChiDAO(DataBase dataBase) {
         this.dataBase = dataBase;
     }
 
-    public long insertKhoanChi(KhoanChi khoanChi){
+    public long insertKhoanChi(KhoanChi khoanChi) {
         SQLiteDatabase sqLiteDatabase = dataBase.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUMN_NAME,khoanChi.getNamechi());
-        contentValues.put(COLUMN_SOTIEN,khoanChi.getSotienchi());
-        contentValues.put(COLUMN_NGAYCHI,sdf.format(khoanChi.getNgaychi()));
+        contentValues.put(COLUMN_NAME, khoanChi.getNamechi());
+        contentValues.put(COLUMN_SOTIEN, khoanChi.getSotienchi());
+        contentValues.put(COLUMN_NGAYCHI, sdf.format(khoanChi.getNgaychi()));
 
-        return sqLiteDatabase.insert(TABLE_NAME,null,contentValues);
+        return sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
     }
 
-    public long updateKhoanChi(KhoanChi khoanChi){
+    public long updateKhoanChi(KhoanChi khoanChi) {
         SQLiteDatabase sqLiteDatabase = dataBase.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUMN_NAME,khoanChi.getNamechi());
-        contentValues.put(COLUMN_SOTIEN,khoanChi.getSotienchi());
-        contentValues.put(COLUMN_NGAYCHI,sdf.format(khoanChi.getNgaychi()));
+        contentValues.put(COLUMN_NAME, khoanChi.getNamechi());
+        contentValues.put(COLUMN_SOTIEN, khoanChi.getSotienchi());
+        contentValues.put(COLUMN_NGAYCHI, sdf.format(khoanChi.getNgaychi()));
 
-        return sqLiteDatabase.update(TABLE_NAME,contentValues,COLUMN_IDCHI + "=?", new String[]{String.valueOf(khoanChi.getIdchi())});
+        return sqLiteDatabase.update(TABLE_NAME, contentValues, COLUMN_IDCHI + "=?", new String[]{String.valueOf(khoanChi.getIdchi())});
     }
 
-    public long deleteKhoanChi(int id){
+    public long deleteKhoanChi(int id) {
         SQLiteDatabase sqLiteDatabase = dataBase.getWritableDatabase();
-        return sqLiteDatabase.delete(TABLE_NAME,COLUMN_IDCHI + "=?", new String[]{String.valueOf(id)});
+        return sqLiteDatabase.delete(TABLE_NAME, COLUMN_IDCHI + "=?", new String[]{String.valueOf(id)});
     }
 
-    public List<KhoanChi> getAllKhoanChi(){
+    public List<KhoanChi> getAllKhoanChi() {
         SQLiteDatabase sqLiteDatabase = dataBase.getReadableDatabase();
         List<KhoanChi> chiList = new ArrayList<>();
 
         String select = "SELECT * FROM " + TABLE_NAME;
-        Cursor cursor = sqLiteDatabase.rawQuery(select,null);
+        Cursor cursor = sqLiteDatabase.rawQuery(select, null);
         cursor.moveToFirst();
 
-        while (!cursor.isAfterLast()){
+        while (!cursor.isAfterLast()) {
             KhoanChi khoanChi = new KhoanChi();
             khoanChi.setIdchi(cursor.getInt(cursor.getColumnIndex(COLUMN_IDCHI)));
             khoanChi.setNamechi(cursor.getString(cursor.getColumnIndex(COLUMN_NAME)));
@@ -80,6 +81,7 @@ public class KhoanChiDAO {
         cursor.close();
         return chiList;
     }
+
     public int tongChi() {
         SQLiteDatabase sqLiteDatabase = dataBase.getWritableDatabase();
         int tongChi = 0;
@@ -93,5 +95,53 @@ public class KhoanChiDAO {
         }
         c.close();
         return tongChi;
+    }
+
+    // truy vấn thống kê
+    public int tienChiNgay(Date date) {
+        SQLiteDatabase sqLiteDatabase = dataBase.getWritableDatabase();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        dateInput = sdf.format(date);
+        int sotien = 0;
+        String SQL = "SELECT sum(sotienchi) as tongchi FROM khoanchi WHERE ngaychi = " + '"' + dateInput + '"';
+        Cursor cursor = sqLiteDatabase.rawQuery(SQL, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            int t = cursor.getInt(0);
+            Log.e("t", cursor + "");
+            sotien += t;
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return sotien;
+    }
+
+    public int tienChiThang(String thang) {
+        SQLiteDatabase sqLiteDatabase = dataBase.getWritableDatabase();
+        int sotienthang = 0;
+        String SQL = "SELECT sum(sotienchi) as tongchi FROM khoanchi WHERE strftime('%m',ngaychi) " + " = " + '"' + thang + '"';
+        Cursor cursor = sqLiteDatabase.rawQuery(SQL, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            int t = cursor.getInt(0);
+            sotienthang += t;
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return sotienthang;
+    }
+    public int tienChiNam(String nam) {
+        SQLiteDatabase sqLiteDatabase = dataBase.getWritableDatabase();
+        int sotiennam = 0;
+        String SQL = "SELECT sum(sotienchi) as tongchi FROM khoanchi WHERE strftime('%Y',ngaychi) " + " = " + '"' + nam + '"';
+        Cursor cursor = sqLiteDatabase.rawQuery(SQL, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            int t = cursor.getInt(0);
+            sotiennam += t;
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return sotiennam;
     }
 }
