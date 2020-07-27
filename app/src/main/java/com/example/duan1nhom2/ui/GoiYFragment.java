@@ -36,8 +36,9 @@ public class GoiYFragment extends Fragment {
         btn_goiy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int goiy = Integer.parseInt(edt_goiy.getText().toString());
-                tv_one.setText("1. Nhu cầu thiết yếu: " + (goiy * 55/100));
+                double goiy = Double.parseDouble(edt_goiy.getText().toString());
+                String one = String.valueOf(goiy * 55/100);
+                tv_one.setText("1. Nhu cầu thiết yếu: " + one);
                 tv_two.setText("2. Tiết kiệm: " + (goiy * 10 / 100));
                 tv_three.setText("3. Giáo Dục: " + (goiy * 10/100));
                 tv_four.setText("4. Hưởng Thụ: " + (goiy * 10/100));

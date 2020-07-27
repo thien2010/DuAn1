@@ -47,13 +47,11 @@ public class ThongKeFragment extends Fragment {
         viewpager = view.findViewById(R.id.viewpager);
         AdapterViewPager adapterViewPager = new AdapterViewPager(getParentFragmentManager());
         adapterViewPager.addFragment(new NgayFragment(), "Ngày");
-        adapterViewPager.addFragment(new NgayFragment(), "Tháng");
-        adapterViewPager.addFragment(new NgayFragment(), "Năm");
+        adapterViewPager.addFragment(new ThangFragment(), "Tháng");
+        adapterViewPager.addFragment(new NamFragment(), "Năm");
         viewpager.setAdapter(adapterViewPager);
         tablayout.setupWithViewPager(viewpager);
         return view;
-//        SELECT sum(sotienthu) as tongthu FROM khoanthu WHERE ngaythu = "2020-07-24"
-//        SELECT sum(sotienthu) as tongthu FROM khoanthu WHERE strftime("%m",ngaythu) = "07"
-//        SELECT sum(sotienthu) as tongthu FROM khoanthu WHERE strftime("%Y",ngaythu) = "2020"
+
     }
 }
