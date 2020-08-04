@@ -25,7 +25,7 @@ public class KhoanChiDAO {
     public static final String COLUMN_NGAYCHI = "ngaychi";
 
     public static final String SQL_KHOANCHI = "CREATE TABLE " + TABLE_NAME + " ( " +
-            COLUMN_IDCHI + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_NAME + " text," + COLUMN_SOTIEN + " LONG," + COLUMN_NGAYCHI + " date);";
+            COLUMN_IDCHI + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_NAME + " text," + COLUMN_SOTIEN + " long," + COLUMN_NGAYCHI + " date);";
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     public KhoanChiDAO(DataBase dataBase) {
@@ -82,18 +82,17 @@ public class KhoanChiDAO {
         return chiList;
     }
 
-
     // truy vấn thống kê
-    public long tienChiNgay(Date date) {
+    public int tienChiNgay(Date date) {
         SQLiteDatabase sqLiteDatabase = dataBase.getWritableDatabase();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         dateInput = sdf.format(date);
-        long sotien = 0;
+        int sotien = 0;
         String SQL = "SELECT sum(sotienchi) as tongchi FROM khoanchi WHERE ngaychi = " + '"' + dateInput + '"';
         Cursor cursor = sqLiteDatabase.rawQuery(SQL, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            long t = cursor.getInt(0);
+            int t = cursor.getInt(0);
             Log.e("t", cursor + "");
             sotien += t;
             cursor.moveToNext();
@@ -102,28 +101,28 @@ public class KhoanChiDAO {
         return sotien;
     }
 
-    public long tienChiThang(String thang) {
+    public int tienChiThang(String thang) {
         SQLiteDatabase sqLiteDatabase = dataBase.getWritableDatabase();
-        long sotienthang = 0;
+        int sotienthang = 0;
         String SQL = "SELECT sum(sotienchi) as tongchi FROM khoanchi WHERE strftime('%m',ngaychi) " + " = " + '"' + thang + '"';
         Cursor cursor = sqLiteDatabase.rawQuery(SQL, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            long t = cursor.getInt(0);
+            int t = cursor.getInt(0);
             sotienthang += t;
             cursor.moveToNext();
         }
         cursor.close();
         return sotienthang;
     }
-    public long tienChiNam(String nam) {
+    public int tienChiNam(String nam) {
         SQLiteDatabase sqLiteDatabase = dataBase.getWritableDatabase();
-        long sotiennam = 0;
+        int sotiennam = 0;
         String SQL = "SELECT sum(sotienchi) as tongchi FROM khoanchi WHERE strftime('%Y',ngaychi) " + " = " + '"' + nam + '"';
         Cursor cursor = sqLiteDatabase.rawQuery(SQL, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            long t = cursor.getInt(0);
+            int t = cursor.getInt(0);
             sotiennam += t;
             cursor.moveToNext();
         }

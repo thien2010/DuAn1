@@ -11,6 +11,7 @@ public class KhoanChi {
     public KhoanChi() {
     }
 
+
     public int getIdchi() {
         return idchi;
     }

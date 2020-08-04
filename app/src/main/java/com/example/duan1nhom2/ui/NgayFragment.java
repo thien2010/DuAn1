@@ -70,7 +70,7 @@ public class NgayFragment extends Fragment {
                     khoanThuDAO = new KhoanThuDAO(dataBase);
                     khoanChiDAO = new KhoanChiDAO(dataBase);
                     long thungay = khoanThuDAO.tienThuNgay(date);
-                    long chingay = khoanChiDAO.tienChiNgay(date);
+                    int chingay = khoanChiDAO.tienChiNgay(date);
                     long tichluy = thungay - chingay;
                     tv_thu_ngay.setText(" + " + thungay + " VND");
                     tv_chi_ngay.setText(" - " + chingay + " VND");

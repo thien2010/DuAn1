@@ -41,12 +41,12 @@ public class GoiYFragment extends Fragment {
                 if (edt_goiy.getText().toString().isEmpty()) {
                     Toast.makeText(getContext(), "Bạn chưa nhập số tiền!", Toast.LENGTH_SHORT).show();
                 } else {
-                    long goiy = Long.parseLong(edt_goiy.getText().toString());
+                    long goiy = Integer.parseInt(edt_goiy.getText().toString());
                     tv_one.setText("1. Nhu cầu thiết yếu: " + (goiy * 55 / 100)+" VND");
                     tv_two.setText("2. Tiết kiệm: " + (goiy * 10 / 100)+" VND");
                     tv_three.setText("3. Giáo Dục: " + (goiy * 10 / 100)+" VND");
                     tv_four.setText("4. Hưởng Thụ: " + (goiy * 10 / 100)+" VND");
-                    tv_five.setText("5. Cho đi: " + (goiy * 5 / 100));
+                    tv_five.setText("5. Cho đi: " + (goiy * 5 / 100)+" VND");
                     tv_six.setText("3. Tự do tài chính: " + (goiy * 10 / 100)+" VND");
                 }
             }

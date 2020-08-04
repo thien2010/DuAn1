@@ -60,7 +60,7 @@ public class ThangFragment extends Fragment {
                             thang = "0" + thang;
                         }
                         long sotienthu = khoanThuDAO.tienThuThang(thang);
-                        long sotienchi = khoanChiDAO.tienChiThang(thang);
+                        int sotienchi = khoanChiDAO.tienChiThang(thang);
                         long tichluythang = sotienthu - sotienchi;
                         tv_thu_thang.setText(" + " + sotienthu + " VND");
                         tv_chi_thang.setText(" - " + sotienchi + " VND");
