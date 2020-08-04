@@ -50,7 +50,7 @@ public class NamFragment extends Fragment {
                         khoanChiDAO = new KhoanChiDAO(dataBase);
                         khoanThuDAO = new KhoanThuDAO(dataBase);
                         long tienthunam = khoanThuDAO.tienThuNam(nam);
-                        int tienchinam = khoanChiDAO.tienChiNam(nam);
+                        long tienchinam = khoanChiDAO.tienChiNam(nam);
                         long tichluynam = tienthunam - tienchinam;
                         tv_thu_nam.setText(" + " + tienthunam + " VND");
                         tv_chi_nam.setText(" - " + tienchinam + " VND");
