@@ -5,23 +5,10 @@ import java.util.Date;
 public class KhoanChi {
     private int idchi;
     private String namechi;
-    private int sotienchi;
+    private long sotienchi;
     private Date ngaychi;
 
     public KhoanChi() {
-    }
-
-    public KhoanChi(String namechi, int sotienchi, Date ngaychi) {
-        this.namechi = namechi;
-        this.sotienchi = sotienchi;
-        this.ngaychi = ngaychi;
-    }
-
-    public KhoanChi(int idchi, String namechi, int sotienchi, Date ngaychi) {
-        this.idchi = idchi;
-        this.namechi = namechi;
-        this.sotienchi = sotienchi;
-        this.ngaychi = ngaychi;
     }
 
     public int getIdchi() {
@@ -40,11 +27,11 @@ public class KhoanChi {
         this.namechi = namechi;
     }
 
-    public int getSotienchi() {
+    public long getSotienchi() {
         return sotienchi;
     }
 
-    public void setSotienchi(int sotienchi) {
+    public void setSotienchi(long sotienchi) {
         this.sotienchi = sotienchi;
     }
 

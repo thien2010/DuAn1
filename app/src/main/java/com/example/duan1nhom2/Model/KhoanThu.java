@@ -5,7 +5,7 @@ import java.util.Date;
 public class KhoanThu {
     private int idthu;
     private String namethu;
-    private int sotien;
+    private long sotien;
     private Date ngaythu;
 
     public KhoanThu() {
@@ -34,11 +34,11 @@ public class KhoanThu {
         this.namethu = namethu;
     }
 
-    public int getSotien() {
+    public long getSotien() {
         return sotien;
     }
 
-    public void setSotien(int sotien) {
+    public void setSotien(long sotien) {
         this.sotien = sotien;
     }
 

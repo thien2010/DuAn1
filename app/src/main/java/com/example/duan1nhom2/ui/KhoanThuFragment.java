@@ -9,6 +9,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +29,7 @@ import com.example.duan1nhom2.DataBase.DataBase;
 import com.example.duan1nhom2.Model.KhoanThu;
 import com.example.duan1nhom2.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -42,7 +45,7 @@ public class KhoanThuFragment extends Fragment {
     KhoanThuDAO khoanThuDAO;
     FloatingActionButton floatingActionButton;
     KhoanChiDAO khoanChiDAO;
-    TextView tv_tongTien;
+    TextInputLayout input_nameThu, input_soTien;
 
     public View onCreateView(@NonNull final LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -60,12 +63,15 @@ public class KhoanThuFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                View view1 = LayoutInflater.from(getContext()).inflate(R.layout.add_thu,null);
+                View view1 = LayoutInflater.from(getContext()).inflate(R.layout.add_thu, null);
                 builder.setView(view1);
                 final EditText edt_namethu = view1.findViewById(R.id.edt_nameThu);
                 final EditText edt_sotien = view1.findViewById(R.id.edt_stThu);
-                final TextView tv_ngaythu =  view1.findViewById(R.id.tv_date);
+                final TextView tv_ngaythu = view1.findViewById(R.id.tv_date);
+                input_nameThu = view1.findViewById(R.id.input_nameThu);
+                input_soTien = view1.findViewById(R.id.input_soTien);
                 Button btn_datepiker = view1.findViewById(R.id.btn_datePicker);
+
                 btn_datepiker.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -84,6 +90,53 @@ public class KhoanThuFragment extends Fragment {
                         datePickerDialog.show();
                     }
                 });
+                // kiểm soát lỗi để trống
+                if (edt_namethu.getText().length() == 0) {
+                    input_nameThu.setError("Không được để trống");
+                } else {
+                    input_nameThu.setError(null);
+                }
+                edt_namethu.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        if (s.length() > 0) {
+                            input_nameThu.setError(null);
+                        }
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+
+                    }
+                });
+                if (edt_namethu.getText().length() == 0) {
+                    input_soTien.setError("Không được để trống");
+                } else {
+                    input_soTien.setError(null);
+                }
+                edt_sotien.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        if (s.length() > 0) {
+                            input_soTien.setError(null);
+                        }
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+
+                    }
+                });
                 builder.setPositiveButton("Hủy", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -94,30 +147,36 @@ public class KhoanThuFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        Date date = null;
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                        try {
-                            date = simpleDateFormat.parse(tv_ngaythu.getText().toString());
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-
-                        KhoanThu khoanThu = new KhoanThu();
-                        khoanThu.setNamethu(edt_namethu.getText().toString());
-                        khoanThu.setSotien(Integer.valueOf(edt_sotien.getText().toString()));
-                        khoanThu.setNgaythu(date);
-
-                        dataBase = new DataBase(getActivity());
-                        KhoanThuDAO khoanThuDAO;
-                        khoanThuDAO = new KhoanThuDAO(dataBase);
-                        long value = khoanThuDAO.insertKhoanThu(khoanThu);
-                        if (value > 0) {
-                            Toast.makeText(getActivity(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                        if (tv_ngaythu.getText().toString().isEmpty()) {
+                            Toast.makeText(getActivity(), "Bạn chưa chọn ngày!", Toast.LENGTH_SHORT).show();
+                        } else if (edt_namethu.getText().toString().isEmpty() || edt_sotien.getText().toString().isEmpty()) {
+                            Toast.makeText(getActivity(), "Không được để trống!", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(getActivity(), "Thất bại", Toast.LENGTH_SHORT).show();
+                            Date date = null;
+                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                            try {
+                                date = simpleDateFormat.parse(tv_ngaythu.getText().toString());
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+
+                            KhoanThu khoanThu = new KhoanThu();
+                            khoanThu.setNamethu(edt_namethu.getText().toString());
+                            khoanThu.setSotien(Long.valueOf(edt_sotien.getText().toString()));
+                            khoanThu.setNgaythu(date);
+
+                            dataBase = new DataBase(getActivity());
+                            KhoanThuDAO khoanThuDAO;
+                            khoanThuDAO = new KhoanThuDAO(dataBase);
+                            long value = khoanThuDAO.insertKhoanThu(khoanThu);
+                            if (value > 0) {
+                                Toast.makeText(getActivity(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getActivity(), "Thất bại", Toast.LENGTH_SHORT).show();
+                            }
+                            khoanThus = khoanThuDAO.getAllKhoanThu();
+                            adapterKhoanThu.setDatachange(khoanThus);
                         }
-                        khoanThus = khoanThuDAO.getAllKhoanThu();
-                        adapterKhoanThu.setDatachange(khoanThus);
                     }
                 });
                 builder.create().show();

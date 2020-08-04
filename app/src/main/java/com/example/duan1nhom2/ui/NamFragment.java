@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.duan1nhom2.DAO.KhoanChiDAO;
 import com.example.duan1nhom2.DAO.KhoanThuDAO;
@@ -40,17 +41,21 @@ public class NamFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String nam = edt_thongke_nam.getText().toString();
-                int year = Integer.valueOf(nam);
-                if (year > 0) {
-                    dataBase = new DataBase(getContext());
-                    khoanChiDAO = new KhoanChiDAO(dataBase);
-                    khoanThuDAO = new KhoanThuDAO(dataBase);
-                    int tienthunam = khoanThuDAO.tienThuNam(nam);
-                    int tienchinam = khoanChiDAO.tienChiNam(nam);
-                    int tichluynam = tienthunam - tienchinam;
-                    tv_thu_nam.setText(" + " + tienthunam + " $");
-                    tv_chi_nam.setText(" - " + tienchinam + " $");
-                    tv_tichluy_nam.setText(" " + tichluynam + " $");
+                if (nam.isEmpty()) {
+                    Toast.makeText(getContext(), "Bạn chưa nhập năm!", Toast.LENGTH_SHORT).show();
+                } else {
+                    int year = Integer.valueOf(nam);
+                    if (year > 0) {
+                        dataBase = new DataBase(getContext());
+                        khoanChiDAO = new KhoanChiDAO(dataBase);
+                        khoanThuDAO = new KhoanThuDAO(dataBase);
+                        long tienthunam = khoanThuDAO.tienThuNam(nam);
+                        long tienchinam = khoanChiDAO.tienChiNam(nam);
+                        long tichluynam = tienthunam - tienchinam;
+                        tv_thu_nam.setText(" + " + tienthunam + " VND");
+                        tv_chi_nam.setText(" - " + tienchinam + " VND");
+                        tv_tichluy_nam.setText(" " + tichluynam + " VND");
+                    }
                 }
             }
         });

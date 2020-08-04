@@ -11,7 +11,7 @@ import com.example.duan1nhom2.DAO.KhoanThuDAO;
 public class DataBase extends SQLiteOpenHelper {
 
     public DataBase(Context context) {
-        super(context, "database5", null, 1);
+        super(context, "database6", null, 1);
     }
 
     @Override

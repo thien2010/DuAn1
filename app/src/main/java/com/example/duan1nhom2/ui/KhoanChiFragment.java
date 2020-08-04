@@ -7,6 +7,8 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +27,7 @@ import com.example.duan1nhom2.DataBase.DataBase;
 import com.example.duan1nhom2.Model.KhoanChi;
 import com.example.duan1nhom2.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -40,7 +43,7 @@ public class KhoanChiFragment extends Fragment {
     List<KhoanChi> khoanChis;
     KhoanChiDAO khoanChiDAO;
     FloatingActionButton floatingActionButton;
-    TextView tv_tongTien;
+    TextInputLayout input_nameChi, input_soTien;
     KhoanThuDAO khoanThuDAO;
 
     public KhoanChiFragment() {
@@ -72,6 +75,8 @@ public class KhoanChiFragment extends Fragment {
                 final EditText edt_namechi = view1.findViewById(R.id.edt_nameChi);
                 final EditText edt_sotienchi = view1.findViewById(R.id.edt_stChi);
                 final TextView tv_ngaychi = view1.findViewById(R.id.tv_date_chi);
+                input_nameChi = view1.findViewById(R.id.input_nameChi);
+                input_soTien = view1.findViewById(R.id.input_soTienChi);
                 Button btn_datepiker = view1.findViewById(R.id.btn_datePicker);
 
                 btn_datepiker.setOnClickListener(new View.OnClickListener() {
@@ -92,6 +97,53 @@ public class KhoanChiFragment extends Fragment {
                         datePickerDialog.show();
                     }
                 });
+                // kiểm soát để trống khi nhập
+                if (edt_namechi.getText().length() == 0) {
+                    input_nameChi.setError("Không được để trống");
+                } else {
+                    input_nameChi.setError(null);
+                }
+                edt_namechi.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        if (s.length() > 0) {
+                            input_nameChi.setError(null);
+                        }
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+
+                    }
+                });
+                if (edt_sotienchi.getText().length() == 0) {
+                    input_soTien.setError("Không được để trống");
+                } else {
+                    input_soTien.setError(null);
+                }
+                edt_sotienchi.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        if (s.length() > 0) {
+                            input_soTien.setError(null);
+                        }
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+
+                    }
+                });
                 builder.setPositiveButton("Hủy", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -101,29 +153,35 @@ public class KhoanChiFragment extends Fragment {
                 builder.setNegativeButton("Thêm", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Date date = null;
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                        try {
-                            date = simpleDateFormat.parse(tv_ngaychi.getText().toString());
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-                        KhoanChi khoanChi = new KhoanChi();
-                        khoanChi.setNamechi(edt_namechi.getText().toString());
-                        khoanChi.setSotienchi(Integer.valueOf(edt_sotienchi.getText().toString()));
-                        khoanChi.setNgaychi(date);
-
-                        dataBase = new DataBase(getActivity());
-                        KhoanChiDAO khoanChiDAO;
-                        khoanChiDAO = new KhoanChiDAO(dataBase);
-                        long value = khoanChiDAO.insertKhoanChi(khoanChi);
-                        if (value > 0) {
-                            Toast.makeText(getActivity(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                        if (tv_ngaychi.getText().toString().isEmpty()) {
+                            Toast.makeText(getActivity(), "Bạn chưa chọn ngày!", Toast.LENGTH_SHORT).show();
+                        } else if (edt_namechi.getText().toString().isEmpty() || edt_sotienchi.getText().toString().isEmpty()) {
+                            Toast.makeText(getActivity(), "Không được để trống!", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(getActivity(), "Thất bại", Toast.LENGTH_SHORT).show();
+                            Date date = null;
+                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                            try {
+                                date = simpleDateFormat.parse(tv_ngaychi.getText().toString());
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                            KhoanChi khoanChi = new KhoanChi();
+                            khoanChi.setNamechi(edt_namechi.getText().toString());
+                            khoanChi.setSotienchi(Long.valueOf(edt_sotienchi.getText().toString()));
+                            khoanChi.setNgaychi(date);
+
+                            dataBase = new DataBase(getActivity());
+                            KhoanChiDAO khoanChiDAO;
+                            khoanChiDAO = new KhoanChiDAO(dataBase);
+                            long value = khoanChiDAO.insertKhoanChi(khoanChi);
+                            if (value > 0) {
+                                Toast.makeText(getActivity(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getActivity(), "Thất bại", Toast.LENGTH_SHORT).show();
+                            }
+                            khoanChis = khoanChiDAO.getAllKhoanChi();
+                            adapterKhoanChi.setDatachange(khoanChis);
                         }
-                        khoanChis = khoanChiDAO.getAllKhoanChi();
-                        adapterKhoanChi.setDatachange(khoanChis);
                     }
                 });
                 builder.create().show();

@@ -25,7 +25,7 @@ public class KhoanThuDAO {
     public static final String COLUMN_NGAYTHU = "ngaythu";
 
     public static final String SQL_KHOANTHU = "CREATE TABLE " + TABLE_NAME + " ( " +
-            COLUMN_IDTHU + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_NAME + " text, " + COLUMN_SOTIEN + " INTERGER, " + COLUMN_NGAYTHU + " date)";
+            COLUMN_IDTHU + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_NAME + " text, " + COLUMN_SOTIEN + " LONG, " + COLUMN_NGAYTHU + " date)";
 
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -69,7 +69,7 @@ public class KhoanThuDAO {
             KhoanThu khoanThu = new KhoanThu();
             khoanThu.setIdthu(cursor.getInt(cursor.getColumnIndex(COLUMN_IDTHU)));
             khoanThu.setNamethu(cursor.getString(cursor.getColumnIndex(COLUMN_NAME)));
-            khoanThu.setSotien(cursor.getInt(cursor.getColumnIndex(COLUMN_SOTIEN)));
+            khoanThu.setSotien(cursor.getLong(cursor.getColumnIndex(COLUMN_SOTIEN)));
             try {
                 khoanThu.setNgaythu((Date) sdf.parse(cursor.getString(cursor.getColumnIndex(COLUMN_NGAYTHU))));
             } catch (ParseException e) {
@@ -82,48 +82,18 @@ public class KhoanThuDAO {
         return thuList;
     }
 
-    public int tongThu() {
-        SQLiteDatabase sqLiteDatabase = dataBase.getWritableDatabase();
-        int tongThu = 0;
-        String sSQL = "SELECT SUM(sotienthu) as 'tongThu'" +
-                " FROM khoanthu ";
-        Cursor c = sqLiteDatabase.rawQuery(sSQL, null);
-        c.moveToFirst();
-        while (!c.isAfterLast()) {
-            tongThu = c.getInt(0);
-            c.moveToNext();
-        }
-        c.close();
-        return tongThu;
-    }
-
-    public int tongThuTheoNgay(int day) {
-        SQLiteDatabase sqLiteDatabase = dataBase.getWritableDatabase();
-        int tongThuTheoNgay = 0;
-        String sSQL = "SELECT idthu, SUM(sotienthu) as 'tongthu'" +
-                " FROM khoanthu" +
-                " where strftime('%d',khoanthu.ngaythu) = '" + day + "' GROUP BY khoanthu.idthu)tmp";
-        Cursor c = sqLiteDatabase.rawQuery(sSQL, null);
-        c.moveToFirst();
-        while (!c.isAfterLast()) {
-            tongThuTheoNgay = c.getInt(0);
-            c.moveToNext();
-        }
-        c.close();
-        return tongThuTheoNgay;
-    }
 
     // truy vấn thống kê
-    public int tienThuNgay(Date date) {
+    public long tienThuNgay(Date date) {
         SQLiteDatabase sqLiteDatabase = dataBase.getWritableDatabase();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         dateInput = sdf.format(date);
-        int sotien = 0;
+        long sotien = 0;
         String SQL = "SELECT sum(sotienthu) as tongthu FROM khoanthu WHERE ngaythu = " + '"' + dateInput + '"';
         Cursor cursor = sqLiteDatabase.rawQuery(SQL, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            int t = cursor.getInt(0);
+            long t = cursor.getLong(0);
             Log.e("t", cursor + "");
             sotien += t;
             cursor.moveToNext();
@@ -132,14 +102,14 @@ public class KhoanThuDAO {
         return sotien;
     }
 
-    public int tienThuThang(String thang) {
+    public long tienThuThang(String thang) {
         SQLiteDatabase sqLiteDatabase = dataBase.getWritableDatabase();
-        int sotienthang = 0;
+        long sotienthang = 0;
         String SQL = "SELECT sum(sotienthu) as tongthu FROM khoanthu WHERE strftime('%m',ngaythu) " + " = " + '"' + thang + '"';
         Cursor cursor = sqLiteDatabase.rawQuery(SQL, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            int t = cursor.getInt(0);
+            long t = cursor.getLong(0);
             sotienthang += t;
             cursor.moveToNext();
         }
@@ -147,14 +117,14 @@ public class KhoanThuDAO {
         return sotienthang;
     }
 
-    public int tienThuNam(String nam) {
+    public long tienThuNam(String nam) {
         SQLiteDatabase sqLiteDatabase = dataBase.getWritableDatabase();
-        int sotiennam = 0;
+        long sotiennam = 0;
         String SQL = "SELECT sum(sotienthu) as tongthu FROM khoanthu WHERE strftime('%Y',ngaythu) " + " = " + '"' + nam + '"';
         Cursor cursor = sqLiteDatabase.rawQuery(SQL, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            int t = cursor.getInt(0);
+            long t = cursor.getLong(0);
             sotiennam += t;
             cursor.moveToNext();
         }

@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,12 +16,14 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.duan1nhom2.DAO.KhoanChiDAO;
 import com.example.duan1nhom2.DAO.KhoanThuDAO;
 import com.example.duan1nhom2.DataBase.DataBase;
 import com.example.duan1nhom2.Model.KhoanThu;
 import com.example.duan1nhom2.R;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.Format;
 import java.text.ParseException;
@@ -33,6 +37,7 @@ public class AdapterKhoanThu extends BaseAdapter {
     List<KhoanThu> khoanThuList;
     DataBase dataBase;
     KhoanThuDAO khoanThuDAO;
+    TextInputLayout fix_nameThu, fix_soTienThu;
 
     public AdapterKhoanThu(Context context, List<KhoanThu> khoanThuList) {
         this.context = context;
@@ -58,10 +63,9 @@ public class AdapterKhoanThu extends BaseAdapter {
     public View getView(int position, View convertView, final ViewGroup parent) {
         convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_thu, parent, false);
         final KhoanThu khoanThu = (KhoanThu) getItem(position);
-        TextView tv_ngaythu = convertView.findViewById(R.id.ngayThu);
+        final TextView tv_ngaythu = convertView.findViewById(R.id.ngayThu);
         TextView tv_name = convertView.findViewById(R.id.nameThu);
         TextView tv_sotien = convertView.findViewById(R.id.sotienThu);
-        ImageView img_thu = convertView.findViewById(R.id.img_thu);
         ImageView img_delete = convertView.findViewById(R.id.delete_Thu);
         ImageView img_update = convertView.findViewById(R.id.update_Thu);
 
@@ -69,17 +73,19 @@ public class AdapterKhoanThu extends BaseAdapter {
         String s = formatter.format(khoanThu.getNgaythu());
 
         tv_ngaythu.setText(s);
-        tv_name.setText("Nhận: "+khoanThu.getNamethu());
-        tv_sotien.setText("Số Tiền: "+khoanThu.getSotien() + "$");
+        tv_name.setText(khoanThu.getNamethu());
+        tv_sotien.setText("Số Tiền: " + khoanThu.getSotien() + " VND");
         img_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                View view = LayoutInflater.from(context).inflate(R.layout.sua_thu,null);
+                final View view = LayoutInflater.from(context).inflate(R.layout.sua_thu, null);
                 builder.setView(view);
                 final TextView update_ngaythu = view.findViewById(R.id.update_ngaythu);
                 final EditText update_sotien_thu = view.findViewById(R.id.update_sotienthu);
                 final EditText update_name_thu = view.findViewById(R.id.update_namethu);
+                fix_nameThu = view.findViewById(R.id.fix_nameThu);
+                fix_soTienThu = view.findViewById(R.id.fix_soTienThu);
                 Button datepicker_ngaythu = view.findViewById(R.id.datepicker_thu);
                 datepicker_ngaythu.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -99,24 +105,77 @@ public class AdapterKhoanThu extends BaseAdapter {
                         datePickerDialog.show();
                     }
                 });
+                // kiểm soát nhập
+                if (update_name_thu.getText().length() == 0) {
+                    fix_nameThu.setError("Không được để trống");
+                } else {
+                    fix_nameThu.setError(null);
+                }
+                update_name_thu.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        if (s.length() > 0) {
+                            fix_nameThu.setError(null);
+                        }
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+
+                    }
+                });
+                if (update_sotien_thu.getText().length() == 0) {
+                    fix_soTienThu.setError("Không được để trống");
+                } else {
+                    fix_soTienThu.setError(null);
+                }
+                update_sotien_thu.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        if (s.length() > 0) {
+                            fix_soTienThu.setError(null);
+                        }
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+
+                    }
+                });
                 builder.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Date date = null;
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                        try {
-                            date = simpleDateFormat.parse(update_ngaythu.getText().toString());
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-                        khoanThu.setNamethu(update_name_thu.getText().toString());
-                        khoanThu.setSotien(Integer.valueOf(update_sotien_thu.getText().toString()));
-                        khoanThu.setNgaythu(date);
+                        if (update_ngaythu.getText().toString().isEmpty()) {
+                            Toast.makeText(view.getContext(), "Bạn chưa chọn ngày!", Toast.LENGTH_SHORT).show();
+                        } else if (update_name_thu.getText().toString().isEmpty() || update_sotien_thu.getText().toString().isEmpty()) {
+                            Toast.makeText(view.getContext(), "Không được để trống!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Date date = null;
+                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                            try {
+                                date = simpleDateFormat.parse(update_ngaythu.getText().toString());
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                            khoanThu.setNamethu(update_name_thu.getText().toString());
+                            khoanThu.setSotien(Long.valueOf(update_sotien_thu.getText().toString()));
+                            khoanThu.setNgaythu(date);
 
-                        dataBase = new DataBase(parent.getContext());
-                        khoanThuDAO = new KhoanThuDAO(dataBase);
-                        khoanThuDAO.updateKhoanThu(khoanThu);
-                        setDatachange(khoanThuDAO.getAllKhoanThu());
+                            dataBase = new DataBase(parent.getContext());
+                            khoanThuDAO = new KhoanThuDAO(dataBase);
+                            khoanThuDAO.updateKhoanThu(khoanThu);
+                            setDatachange(khoanThuDAO.getAllKhoanThu());
+                        }
                     }
                 });
                 builder.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
@@ -140,7 +199,7 @@ public class AdapterKhoanThu extends BaseAdapter {
                                 khoanThuDAO = new KhoanThuDAO(dataBase);
                                 int id = khoanThu.getIdthu();
                                 khoanThuDAO.deleteKhoanThu(id);
-                                Log.e("id",""+id);
+                                Log.e("id", "" + id);
                                 setDatachange(khoanThuDAO.getAllKhoanThu());
                             }
                         })

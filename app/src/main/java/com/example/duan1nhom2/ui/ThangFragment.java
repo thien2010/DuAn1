@@ -49,19 +49,23 @@ public class ThangFragment extends Fragment {
                 khoanThuDAO = new KhoanThuDAO(dataBase);
                 khoanChiDAO = new KhoanChiDAO(dataBase);
                 String thang = edt_thongke_thang.getText().toString();
-                int month = Integer.valueOf(thang);
-                if (month <= 0 || month > 12) {
-                    Toast.makeText(getContext(), "Tháng phải lớn hơn 0 và nhỏ hơn 12", Toast.LENGTH_SHORT).show();
+                if (thang.isEmpty()) {
+                    Toast.makeText(getContext(), "Bạn chưa nhập tháng!", Toast.LENGTH_SHORT).show();
                 } else {
-                    if (month > 0 && month < 10) {
-                        thang = "0" + thang;
+                    int month = Integer.valueOf(thang);
+                    if (month <= 0 || month > 12) {
+                        Toast.makeText(getContext(), "Tháng phải lớn hơn 0 và nhỏ hơn 12", Toast.LENGTH_SHORT).show();
+                    } else {
+                        if (month > 0 && month < 10) {
+                            thang = "0" + thang;
+                        }
+                        long sotienthu = khoanThuDAO.tienThuThang(thang);
+                        long sotienchi = khoanChiDAO.tienChiThang(thang);
+                        long tichluythang = sotienthu - sotienchi;
+                        tv_thu_thang.setText(" + " + sotienthu + " VND");
+                        tv_chi_thang.setText(" - " + sotienchi + " VND");
+                        tv_tichluy_thang.setText(" " + tichluythang + " VND");
                     }
-                    int sotienthu = khoanThuDAO.tienThuThang(thang);
-                    int sotienchi = khoanChiDAO.tienChiThang(thang);
-                    int tichluythang = sotienthu - sotienchi;
-                    tv_thu_thang.setText(" + " + sotienthu + " $");
-                    tv_chi_thang.setText(" - " + sotienchi + " $");
-                    tv_tichluy_thang.setText(" " + tichluythang + " $");
                 }
 
             }

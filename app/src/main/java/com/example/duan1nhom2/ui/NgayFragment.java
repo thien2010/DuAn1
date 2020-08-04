@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.duan1nhom2.DAO.KhoanChiDAO;
 import com.example.duan1nhom2.DAO.KhoanThuDAO;
@@ -62,15 +63,19 @@ public class NgayFragment extends Fragment {
         btn_date_ngay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dataBase = new DataBase(getContext());
-                khoanThuDAO = new KhoanThuDAO(dataBase);
-                khoanChiDAO = new KhoanChiDAO(dataBase);
-                int thungay = khoanThuDAO.tienThuNgay(date);
-                int chingay = khoanChiDAO.tienChiNgay(date);
-                int tichluy = thungay - chingay;
-                tv_thu_ngay.setText(" + " + thungay + " $");
-                tv_chi_ngay.setText(" - " + chingay + " $");
-                tv_tichluy_ngay.setText(" " + tichluy + " $");
+                if (date == null) {
+                    Toast.makeText(getContext(), "Bạn chưa chọn ngày!", Toast.LENGTH_SHORT).show();
+                } else {
+                    dataBase = new DataBase(getContext());
+                    khoanThuDAO = new KhoanThuDAO(dataBase);
+                    khoanChiDAO = new KhoanChiDAO(dataBase);
+                    long thungay = khoanThuDAO.tienThuNgay(date);
+                    long chingay = khoanChiDAO.tienChiNgay(date);
+                    long tichluy = thungay - chingay;
+                    tv_thu_ngay.setText(" + " + thungay + " VND");
+                    tv_chi_ngay.setText(" - " + chingay + " VND");
+                    tv_tichluy_ngay.setText(" " + tichluy + " VND");
+                }
             }
         });
 

@@ -18,9 +18,11 @@
         android:textStyle="bold" />
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/fix_nameThu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Tên khoản thu">
+        android:hint="Tên khoản thu"
+        app:errorEnabled="true">
 
         <EditText
             android:id="@+id/update_namethu"
@@ -29,6 +31,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/fix_soTienThu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Số tiền">
@@ -36,7 +39,8 @@
         <EditText
             android:id="@+id/update_sotienthu"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
