@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/border_button"
             android:text="OK"
             android:textAllCaps="false"
             android:textColor="#fff" />
@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:background="@color/colorPrimary"
-        android:text="Tổng thu:"
+        android:text=""
         android:textColor="#fff"
         android:textSize="24sp" />
 
@@ -65,7 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:background="@color/colorPrimary"
-        android:text="Tổng chi:"
+        android:text=""
         android:textColor="#fff"
         android:textSize="24sp" />
 
@@ -83,7 +83,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:background="@color/colorPrimary"
-        android:text="Tích lũy:"
+        android:text=""
         android:textColor="#fff"
         android:textSize="24sp" />
     >
