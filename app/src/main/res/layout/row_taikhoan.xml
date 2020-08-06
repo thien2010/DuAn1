@@ -41,6 +41,15 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Email "
+                android:textColor="#000"
+                android:textSize="16sp" />
+
+
+            <TextView
                 android:id="@+id/phoneNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -50,17 +59,12 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/update_Thu"
+            android:id="@+id/edit_nguoidung"
             android:layout_width="36dp"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="60dp"
             android:layout_height="60dp"
-            android:src="@drawable/ic_sua" />
+            android:src="@drawable/ic_edit_24dp" />
 
-        <ImageView
-            android:id="@+id/delete_Thu"
-            android:layout_width="36dp"
-            android:layout_height="60dp"
-            android:src="@drawable/ic_xoa" />
     </LinearLayout>
 
 </LinearLayout>

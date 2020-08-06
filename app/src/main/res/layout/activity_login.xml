@@ -32,7 +32,7 @@
 
 
     <CheckBox
-        android:id="@+id/chkRememberPass"
+        android:id="@+id/rememberLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Remember me" />
@@ -50,12 +50,11 @@
         android:textColor="#F6F5F8" />
 
     <Button
-        android:id="@+id/btndangky"
         android:layout_width="250dp"
         android:layout_gravity="center_horizontal"
         android:layout_height="wrap_content"
         android:background="@drawable/border_button"
-        android:onClick="register"
+        android:onClick="signUp"
         android:text="Đăng ký"
         android:textColor="#F6F5F8" />
 

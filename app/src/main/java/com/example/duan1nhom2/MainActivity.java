@@ -1,5 +1,6 @@
 package com.example.duan1nhom2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -49,8 +50,12 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
         switch (id) {
             case R.id.item_taikhoan:
+                Intent intent = new Intent(MainActivity.this,ListNguoiDungActivity.class);
+                startActivity(intent);
                 break;
             case R.id.item_dangxuat:
+                Intent intent1 = new Intent(MainActivity.this,activity_login.class);
+                startActivity(intent1);
                 break;
         }
         return super.onOptionsItemSelected(item);
