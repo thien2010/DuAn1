@@ -28,9 +28,9 @@ public class ListNguoiDungActivity extends AppCompatActivity {
         setContentView(R.layout.list_nguoidung);
 
         list_nguoidung =findViewById(R.id.lvNguoiDung);
-
+        dataBase = new DataBase(this);
         nguoiDungDAO = new NguoiDungDAO(dataBase);
-        nguoiDungList = nguoiDungDAO.getAllNguoiDung();
+        nguoiDungList = nguoiDungDAO.getAllND();
         adapterNguoiDung = new AdapterNguoiDung(ListNguoiDungActivity.this,nguoiDungList);
         list_nguoidung.setAdapter(adapterNguoiDung);
 

@@ -21,7 +21,7 @@ import com.example.duan1nhom2.Model.NguoiDung;
 
 import java.util.List;
 
-public class activity_login extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     DataBase dataBase;
 
     EditText edt_user, edt_pass;
@@ -56,21 +56,21 @@ public class activity_login extends AppCompatActivity {
         String user = edt_user.getText().toString();
         String pass = edt_pass.getText().toString();
         boolean remem = remember.isChecked();
-        DataBase dataBase = new DataBase(activity_login.this);
+        DataBase dataBase = new DataBase(LoginActivity.this);
         NguoiDungDAO nguoiDungDAO = new NguoiDungDAO(dataBase);
-        List<NguoiDung> nguoiDungs = nguoiDungDAO.getAllNguoiDung();
+        List<NguoiDung> nguoiDungs = nguoiDungDAO.getAllND();
         if (user.isEmpty() || pass.isEmpty()) {
-            Toast.makeText(activity_login.this, "Không được để trống", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, "Không được để trống", Toast.LENGTH_SHORT).show();
         } else {
             if (user.equalsIgnoreCase(nguoiDungs.get(0).getUsername()) && pass.equalsIgnoreCase(nguoiDungs.get(0).getPassword())) {
                 rememberLogin(user, pass, remem);
-                Toast.makeText(activity_login.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(activity_login.this, MainActivity.class);
+                Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
             } else {
                 if (user.equals(nguoiDungs.get(0).getUsername()) && pass.equals(nguoiDungs.get(0).getPassword())) {
-                    Toast.makeText(activity_login.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(activity_login.this, MainActivity.class);
+                    Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                 } else {
                     Toast.makeText(this, "Tài Khoản Mật Khẩu Không Đúng", Toast.LENGTH_SHORT).show();
@@ -80,7 +80,7 @@ public class activity_login extends AppCompatActivity {
     }
 
     public void signUp(View view) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(activity_login.this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
         View view1 = LayoutInflater.from(this).inflate(R.layout.add_taikhoan, null);
         builder.setView(view1);
         final EditText user = view1.findViewById(R.id.sign_user);
@@ -101,17 +101,17 @@ public class activity_login extends AppCompatActivity {
                     nguoiDung.setFullname(fullName.getText().toString());
                     nguoiDung.setEmail(email.getText().toString());
                     NguoiDungDAO nguoiDungDAO;
-                    dataBase = new DataBase(activity_login.this);
+                    dataBase = new DataBase(LoginActivity.this);
                     nguoiDungDAO = new NguoiDungDAO(dataBase);
                     long value = nguoiDungDAO.insertNguoiDung(nguoiDung);
                     Log.e("thien",value + "");
                     if (value > 0) {
-                        Toast.makeText(activity_login.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(activity_login.this, "Thất bại", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Thất bại", Toast.LENGTH_SHORT).show();
                     }
                 }else {
-                    Toast.makeText(activity_login.this, "Không Được Để Trống", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Không Được Để Trống", Toast.LENGTH_SHORT).show();
                 }
             }
         }).setPositiveButton("Hủy", new DialogInterface.OnClickListener() {

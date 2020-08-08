@@ -4,11 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
-import com.example.duan1nhom2.DAO.KhoanChiDAO;
-import com.example.duan1nhom2.DAO.KhoanThuDAO;
-import com.example.duan1nhom2.DataBase.DataBase;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
@@ -54,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.item_dangxuat:
-                Intent intent1 = new Intent(MainActivity.this,activity_login.class);
+                Intent intent1 = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent1);
                 break;
         }

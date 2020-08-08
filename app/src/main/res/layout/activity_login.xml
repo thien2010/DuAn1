@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:layout_height="match_parent"
     android:padding="15dp"
-    tools:context=".activity_login">
+    tools:context=".LoginActivity">
 
     <com.google.android.material.textfield.TextInputLayout
         android:hint="Username"
@@ -26,6 +26,7 @@
         android:layout_height="wrap_content">
         <EditText
             android:id="@+id/edt_pass"
+            android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
