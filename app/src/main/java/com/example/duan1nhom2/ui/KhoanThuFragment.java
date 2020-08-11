@@ -1,5 +1,6 @@
 package com.example.duan1nhom2.ui;
 
+import android.animation.ObjectAnimator;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
@@ -58,7 +59,9 @@ public class KhoanThuFragment extends Fragment {
         khoanChiDAO = new KhoanChiDAO(dataBase);
         adapterKhoanThu = new AdapterKhoanThu(getActivity(), khoanThus);
         lv_khoanthu.setAdapter(adapterKhoanThu);
-
+        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(lv_khoanthu, "translationX", -1000f, 0f);
+        objectAnimator.setDuration(2000);
+        objectAnimator.start();
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
