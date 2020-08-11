@@ -6,7 +6,7 @@
         android:allowBackup="true"
         android:icon="@drawable/logo"
         android:label="Quản Lý Chi Tiêu"
-        android:roundIcon="@drawable/ic_launcher_background"
+        android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ManHinhCho">
