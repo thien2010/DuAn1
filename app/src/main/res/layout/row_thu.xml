@@ -54,13 +54,14 @@
             android:layout_width="36dp"
             android:layout_height="60dp"
             android:layout_marginLeft="15dp"
-            android:src="@drawable/ic_sua" />
+            android:src="@drawable/ic_baseline_create_24" />
 
         <ImageView
             android:id="@+id/delete_Thu"
             android:layout_width="36dp"
             android:layout_height="60dp"
-            android:src="@drawable/ic_xoa" />
+            android:layout_marginLeft="7dp"
+            android:src="@drawable/ic_baseline_delete_24" />
     </LinearLayout>
 
 </LinearLayout>

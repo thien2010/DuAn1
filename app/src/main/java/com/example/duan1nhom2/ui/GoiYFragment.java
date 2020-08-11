@@ -47,7 +47,7 @@ public class GoiYFragment extends Fragment {
                     tv_three.setText("3. Giáo Dục: " + (goiy * 10 / 100)+" VND");
                     tv_four.setText("4. Hưởng Thụ: " + (goiy * 10 / 100)+" VND");
                     tv_five.setText("5. Cho đi: " + (goiy * 5 / 100)+" VND");
-                    tv_six.setText("3. Tự do tài chính: " + (goiy * 10 / 100)+" VND");
+                    tv_six.setText("6. Tự do tài chính: " + (goiy * 10 / 100)+" VND");
                 }
             }
         });
