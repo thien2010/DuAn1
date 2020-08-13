@@ -12,6 +12,7 @@
         android:padding="5dp">
 
         <ImageView
+            android:layout_gravity="center_vertical"
             android:id="@+id/img_nguoidung"
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -59,11 +60,12 @@
         </LinearLayout>
 
         <ImageView
+            android:layout_gravity="center_vertical"
             android:id="@+id/edit_nguoidung"
             android:layout_width="36dp"
             android:layout_marginLeft="60dp"
             android:layout_height="60dp"
-            android:src="@drawable/ic_edit_24dp" />
+            android:src="@drawable/ic_baseline_create_24" />
 
     </LinearLayout>
 
