@@ -29,7 +29,7 @@ public class ThangFragment extends Fragment {
     DataBase dataBase;
     KhoanChiDAO khoanChiDAO;
     KhoanThuDAO khoanThuDAO;
-    TextView tv_thu_thang, tv_chi_thang, tv_tichluy_thang;
+    TextView tv_thu_thang, tv_chi_thang, tv_tichluy_thang, tv_1, tv_2, tv_3;
     Button btn_date_thang;
     EditText edt_thongke_thang;
 
@@ -41,6 +41,12 @@ public class ThangFragment extends Fragment {
         edt_thongke_thang = view.findViewById(R.id.edt_thongke_thang);
         tv_tichluy_thang = view.findViewById(R.id.tv_tichluy_thang);
         btn_date_thang = view.findViewById(R.id.btn_date_thang);
+        tv_1 = view.findViewById(R.id.tv_1);
+        tv_2 = view.findViewById(R.id.tv_2);
+        tv_3 = view.findViewById(R.id.tv_3);
+        tv_thu_thang.setVisibility(View.INVISIBLE);
+        tv_chi_thang.setVisibility(View.INVISIBLE);
+        tv_tichluy_thang.setVisibility(View.INVISIBLE);
 
         btn_date_thang.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +71,12 @@ public class ThangFragment extends Fragment {
                         tv_thu_thang.setText(" + " + sotienthu + " VND");
                         tv_chi_thang.setText(" - " + sotienchi + " VND");
                         tv_tichluy_thang.setText(" " + tichluythang + " VND");
+                        tv_thu_thang.setVisibility(View.VISIBLE);
+                        tv_chi_thang.setVisibility(View.VISIBLE);
+                        tv_tichluy_thang.setVisibility(View.VISIBLE);
+                        tv_1.setVisibility(View.VISIBLE);
+                        tv_2.setVisibility(View.VISIBLE);
+                        tv_3.setVisibility(View.VISIBLE);
                     }
                 }
 

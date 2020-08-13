@@ -60,7 +60,7 @@ public class KhoanThuFragment extends Fragment {
         adapterKhoanThu = new AdapterKhoanThu(getActivity(), khoanThus);
         lv_khoanthu.setAdapter(adapterKhoanThu);
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(lv_khoanthu, "translationX", -1000f, 0f);
-        objectAnimator.setDuration(2000);
+        objectAnimator.setDuration(1300);
         objectAnimator.start();
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override

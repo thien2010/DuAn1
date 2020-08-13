@@ -66,7 +66,7 @@ public class KhoanChiFragment extends Fragment {
         lv_khoanchi.setAdapter(adapterKhoanChi);
 
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(lv_khoanchi, "translationX", -1000f, 0f);
-        objectAnimator.setDuration(2000);
+        objectAnimator.setDuration(1300);
         objectAnimator.start();
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {

@@ -5,9 +5,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingLeft="8dp"
-    tools:context=".ui.NgayFragment">
+    tools:context=".ui.NgayFragment"
+    android:background="@drawable/pig">
 
     <LinearLayout
+        android:gravity="center_horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -17,7 +19,7 @@
             android:id="@+id/tv_thongke_ngay"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="Chọn Ngày:"
+            android:text="Chọn ngày:"
             android:textColor="#000"
             android:textSize="24sp" />
 
@@ -33,12 +35,14 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/tv_text1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Tổng thu:"
         android:textColor="#000"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/tv_thu_ngay"
@@ -51,12 +55,14 @@
         android:textSize="24sp" />
 
     <TextView
+        android:id="@+id/tv_text2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Tổng chi:"
         android:textColor="#000"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/tv_chi_ngay"
@@ -69,12 +75,14 @@
         android:textSize="24sp" />
 
     <TextView
+        android:id="@+id/tv_text3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Tích lũy:"
         android:textColor="#000"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/tv_tichluy_ngay"
